@@ -1,0 +1,5 @@
+/.idea
+/backend/vendor
+/backend/var/cache/*
+/backend/var/log/*
+/backend/var/test/*

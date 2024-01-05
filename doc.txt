@@ -1,0 +1,11 @@
+https://github.com/docker/compose/releases
+https://github.com/docker/cli/tags
+https://github.com/ansible/ansible/releases
+
+docker compose run --rm backand-php-cli composer u
+
+https://github.com/composer/composer/releases
+https://github.com/php/php-src/tags
+
+пакеты
+https://github.com/php-casbin/php-casbin
