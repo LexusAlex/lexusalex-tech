@@ -1,3 +1,7 @@
+# main
+init: docker backend
+docker: docker-build docker-up
+backend:
 # docker
 docker-build:
 	docker compose build --pull

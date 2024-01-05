@@ -6,6 +6,8 @@ docker compose run --rm backand-php-cli composer u
 
 https://github.com/composer/composer/releases
 https://github.com/php/php-src/tags
+https://github.com/nginx/nginx/tags
+https://github.com/postgres/postgres/tags
 
 пакеты
 https://github.com/php-casbin/php-casbin

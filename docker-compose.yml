@@ -15,3 +15,41 @@ services:
          APPLICATION_DEBUG: 1
         volumes:
           - ./:/lexusalex-tech
+    backend-nginx:
+        build:
+          context: backend/docker
+          dockerfile: backend-nginx/Dockerfile
+        ports:
+          - "8080:8080"
+        volumes:
+          - ./:/lexusalex-tech
+        depends_on:
+          - backend-php-fpm
+    backend-php-fpm:
+        build:
+          context: backend/docker
+          dockerfile: backend-php-fpm/Dockerfile
+        environment:
+          POSTGRES_HOST: backend-postgres
+          POSTGRES_USER: lexusalex-tech
+          POSTGRES_PASSWORD: lexusalex-tech
+          POSTGRES_DB: lexusalex-tech
+          POSTGRES_CHARSET: utf-8
+          POSTGRES_PORT: 5432
+          APPLICATION_ENVIRONMENT: development
+          APPLICATION_DEBUG: 1
+        volumes:
+          - ./:/lexusalex-tech
+    backend-postgres:
+        image: postgres:16
+        environment:
+            POSTGRES_USER: lexusalex-tech
+            POSTGRES_PASSWORD: lexusalex-tech
+            POSTGRES_DB: lexusalex-tech
+        volumes:
+            - backend-postgres:/var/lib/postgresql/data
+            - ./:/lexusalex-tech
+        ports:
+            - "5432:5432"
+volumes:
+    backend-postgres:
