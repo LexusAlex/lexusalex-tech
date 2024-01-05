@@ -1,0 +1,25 @@
+{
+  "name": "lexusalex/lexusalex-tech",
+  "description": "lexusalex-tech",
+  "type": "project",
+  "minimum-stability": "stable",
+  "license": "BSD-3-Clause",
+  "config": {
+    "process-timeout": 0,
+    "sort-packages": true
+  },
+  "authors": [
+    {
+      "name": "Alexey Shmelev",
+      "email": "alexsey_89@bk.ru"
+    }
+  ],
+  "require": {
+    "laminas/laminas-config-aggregator": "^1.14",
+    "php-di/php-di": "^7.0",
+    "ramsey/uuid": "^4.7",
+    "robmorgan/phinx": "^0.15.5",
+    "slim/psr7": "^1.6",
+    "slim/slim": "^4.12"
+  }
+}
