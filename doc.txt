@@ -11,4 +11,8 @@ https://github.com/postgres/postgres/tags
 
 пакеты
 docker compose run --rm backend-php-cli composer require laminas/laminas-config-aggregator php-di/php-di ramsey/uuid robmorgan/phinx slim/psr7 slim/slim
+docker compose run --rm backend-php-cli composer require phpunit/phpunit --dev
 https://github.com/php-casbin/php-casbin
+
+Все пакеты для анализа
+docker compose run --rm backend-php-cli composer outdated -a

@@ -21,5 +21,11 @@
     "robmorgan/phinx": "^0.15.5",
     "slim/psr7": "^1.6",
     "slim/slim": "^4.12"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.5"
+  },
+  "scripts": {
+    "phpunit": "phpunit --colors=always --configuration=etc/phpunit.xml"
   }
 }

@@ -14,3 +14,6 @@ composer-install:
 	docker compose run --rm backend-php-cli composer install
 composer-be-updated-all:
 	docker compose run --rm backend-php-cli composer show -l -o
+# backend
+backend-phpunit:
+	docker compose run --rm backend-php-cli composer phpunit
