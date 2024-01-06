@@ -29,6 +29,7 @@
   },
   "require": {
     "laminas/laminas-config-aggregator": "^1.14",
+    "monolog/monolog": "^3.5",
     "php-di/php-di": "^7.0",
     "ramsey/uuid": "^4.7",
     "robmorgan/phinx": "^0.15.5",

@@ -14,5 +14,7 @@ docker compose run --rm backend-php-cli composer require laminas/laminas-config-
 docker compose run --rm backend-php-cli composer require phpunit/phpunit --dev
 https://github.com/php-casbin/php-casbin
 
+docker compose run --rm backend-php-cli composer require monolog/monolog
+
 Все пакеты для анализа
 docker compose run --rm backend-php-cli composer outdated -a
