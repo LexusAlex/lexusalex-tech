@@ -11,6 +11,7 @@
     <testsuites>
         <testsuite name="unit">
             <directory>../src/Configurations/Test</directory>
+            <directory>../src/Http/Test</directory>
         </testsuite>
         <testsuite name="functional">
 
@@ -27,6 +28,7 @@
         </include>
         <exclude>
             <directory suffix=".php">../src/Configurations/Test</directory>
+            <directory suffix=".php">../src/Http/Test</directory>
         </exclude>
     </source>
 </phpunit>
