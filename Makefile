@@ -20,3 +20,9 @@ backend-phpunit:
 	docker compose run --rm backend-php-cli composer phpunit
 backend-php-cs-fixer:
 	docker compose run --rm backend-php-cli composer php-cs-fixer
+backend-create-migrate:
+	docker compose run --rm backend-php-cli composer phinx create -- --configuration etc/phinx.php --template vendor/robmorgan/phinx/src/Phinx/Migration/Migration.up_down.template.php.dist $(name)
+backend-run-migrate:
+	docker compose run --rm backend-php-cli composer phinx migrate -- --configuration etc/phinx.php
+backend-rollback-migrate:
+	docker compose run --rm backend-php-cli composer phinx rollback -- --configuration etc/phinx.php
