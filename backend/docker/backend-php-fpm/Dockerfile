@@ -4,6 +4,11 @@ RUN apt update && apt install -y unzip && pecl install xdebug && docker-php-ext-
 
 COPY ./backend-php-cli/conf.d /usr/local/etc/php/conf.d
 
+RUN apt -y update \
+    && apt install -y libpq-dev \
+    && docker-php-ext-install pdo_pgsql pgsql \
+    && apt clean
+
 RUN mv $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
 
 WORKDIR /lexusalex-tech

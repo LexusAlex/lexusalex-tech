@@ -14,6 +14,7 @@ docker compose run --rm backend-php-cli composer require laminas/laminas-config-
 docker compose run --rm backend-php-cli composer require phpunit/phpunit --dev
 docker compose run --rm backend-php-cli composer require webmozart/assert
 docker compose run --rm backend-php-cli composer require --dev friendsofphp/php-cs-fixer
+docker compose run --rm backend-php-cli composer require doctrine/dbal
 https://github.com/php-casbin/php-casbin
 
 docker compose run --rm backend-php-cli composer require monolog/monolog
@@ -25,6 +26,14 @@ docker compose run --rm backend-php-cli composer outdated -a
 
 пакет lcobucci/jwt
 docker compose run --rm backend-php-cli composer require league/oauth2-server
+
+Для проверки dbal
+ $conn = $container->get(\Doctrine\DBAL\Connection::class);
+ $platform = $conn->getDatabasePlatform();
+ echo "<pre>";
+ $result = $conn->query("SELECT * FROM VERSION();");
+
+ print_r($result->fetchAssociative());
 
 Что сделать при деплое
 поставить 777 backend/var/log/
