@@ -13,8 +13,14 @@ services:
          POSTGRES_PORT: 5432
          APPLICATION_ENVIRONMENT: development
          APPLICATION_DEBUG: 1
+         JWT_ENCRYPTION_KEY: secret
+         JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public.key
+         JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private.key
         volumes:
           - ./:/lexusalex-tech
+        secrets:
+          - jwt_public.key
+          - jwt_private.key
     backend-nginx:
         build:
           context: backend/docker
@@ -38,8 +44,14 @@ services:
           POSTGRES_PORT: 5432
           APPLICATION_ENVIRONMENT: development
           APPLICATION_DEBUG: 1
+          JWT_ENCRYPTION_KEY: secret
+          JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public.key
+          JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private.key
         volumes:
           - ./:/lexusalex-tech
+        secrets:
+          - jwt_public.key
+          - jwt_private.key
     backend-postgres:
         image: postgres:16
         environment:
@@ -51,5 +63,10 @@ services:
             - ./:/lexusalex-tech
         ports:
             - "5432:5432"
+secrets:
+    jwt_public.key:
+        file: ./backend/docker/secrets/jwt_public.key
+    jwt_private.key:
+        file: ./backend/docker/secrets/jwt_private.key
 volumes:
     backend-postgres:
