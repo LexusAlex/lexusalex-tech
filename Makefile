@@ -2,6 +2,7 @@
 init: docker backend
 docker: docker-build docker-up
 backend: composer-install
+check: backend-phpunit backend-php-cs-fixer
 # docker
 docker-build:
 	docker compose build --pull
@@ -17,3 +18,5 @@ composer-be-updated-all:
 # backend
 backend-phpunit:
 	docker compose run --rm backend-php-cli composer phpunit
+backend-php-cs-fixer:
+	docker compose run --rm backend-php-cli composer php-cs-fixer

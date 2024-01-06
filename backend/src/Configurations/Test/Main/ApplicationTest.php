@@ -11,7 +11,7 @@ final class ApplicationTest extends TestCase
 {
     public function testCreateApplication(): void
     {
-        $dependencies = (require __DIR__ . '/../../Main/dependencies.php')((__DIR__. '/src'));
+        $dependencies = (require __DIR__ . '/../../Main/dependencies.php')((__DIR__ . '/../../../../src'));
 
         $container = (require __DIR__ . '/../../Main/container.php')($dependencies);
 

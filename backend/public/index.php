@@ -6,7 +6,7 @@ http_response_code(500);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$dependencies = (require __DIR__ . '/../src/Configurations/Main/dependencies.php')((__DIR__. '/../src'));
+$dependencies = (require __DIR__ . '/../src/Configurations/Main/dependencies.php')((__DIR__ . '/../src'));
 
 $container = (require __DIR__ . '/../src/Configurations/Main/container.php')($dependencies);
 

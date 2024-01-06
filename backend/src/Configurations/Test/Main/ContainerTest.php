@@ -12,7 +12,7 @@ final class ContainerTest extends TestCase
 {
     public function testGetValue(): void
     {
-        $dependencies = (require __DIR__ . '/../../Main/dependencies.php')((__DIR__. '/src'));
+        $dependencies = (require __DIR__ . '/../../Main/dependencies.php')((__DIR__ . '/src'));
         /**
          * @var ContainerInterface $container
          */
@@ -23,7 +23,7 @@ final class ContainerTest extends TestCase
 
     public function testNotFoundValue(): void
     {
-        $dependencies = (require __DIR__ . '/../../Main/dependencies.php')((__DIR__. '/src'));
+        $dependencies = (require __DIR__ . '/../../Main/dependencies.php')((__DIR__ . '/src'));
         /**
          * @var ContainerInterface $container
          */

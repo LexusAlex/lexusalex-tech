@@ -8,8 +8,8 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Interfaces\CallableResolverInterface;
 use Slim\Middleware\ErrorMiddleware;
-use function App\Configurations\Main\environment;
 
+use function App\Configurations\Main\environment;
 
 return [
     ErrorMiddleware::class => static function (ContainerInterface $container): ErrorMiddleware {
@@ -19,7 +19,7 @@ return [
         $middleware = new ErrorMiddleware(
             $callableResolver,
             $responseFactory,
-            (bool)environment('APPLICATION_DEBUG', '0'),
+            (bool) environment('APPLICATION_DEBUG', '0'),
             true,
             true
         );
