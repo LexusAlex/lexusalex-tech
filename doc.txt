@@ -12,6 +12,7 @@ https://github.com/postgres/postgres/tags
 пакеты
 docker compose run --rm backend-php-cli composer require laminas/laminas-config-aggregator php-di/php-di ramsey/uuid robmorgan/phinx slim/psr7 slim/slim
 docker compose run --rm backend-php-cli composer require phpunit/phpunit --dev
+docker compose run --rm backend-php-cli composer require webmozart/assert
 docker compose run --rm backend-php-cli composer require --dev friendsofphp/php-cs-fixer
 https://github.com/php-casbin/php-casbin
 
@@ -20,6 +21,10 @@ docker compose run --rm backend-php-cli composer require monolog/monolog
 Все пакеты для анализа
 docker compose run --rm backend-php-cli composer outdated -a
 
+Аутентификация
+
+пакет lcobucci/jwt
+docker compose run --rm backend-php-cli composer require league/oauth2-server
 
 Что сделать при деплое
 поставить 777 backend/var/log/
