@@ -14,7 +14,7 @@
             <directory>../src/Http/Test</directory>
         </testsuite>
         <testsuite name="functional">
-
+            <directory>../tests/Functional</directory>
         </testsuite>
     </testsuites>
     <php>

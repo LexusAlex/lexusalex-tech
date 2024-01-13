@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Action;
 
 use App\Http\Response\HtmlResponse;
+use App\OAuth\Entity\User;
 use Exception;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
@@ -36,19 +37,23 @@ final class AuthorizeAction implements RequestHandlerInterface
             $authRequest = $this->server->validateAuthorizationRequest($request);
 
             if ($request->getMethod() === 'POST') {
+                // Формируем авторизационный код
+                $authRequest->setUser(new User('123'));
+                $authRequest->setAuthorizationApproved(true);
                 return $this->server->completeAuthorizationRequest($authRequest, $this->response->createResponse());
             }
 
             return new HtmlResponse(
-                'html'
+                'html',
             );
         } catch (OAuthServerException $exception) {
-            $this->logger->warning($exception->getMessage(), ['exception' => $exception]);
+            $this->logger->warning(
+                $exception->getMessage(), [
+                    'exception' => $exception,
+                    'url' => (string) $request->getUri(),
+                    'ip' => (\array_key_exists('REMOTE_ADDR', $request->getServerParams())) ? (string) $request->getServerParams()['REMOTE_ADDR'] : null,]
+            );
             return $exception->generateHttpResponse($this->response->createResponse());
-        } catch (Exception $exception) {
-            $this->logger->error($exception->getMessage(), ['exception' => $exception]);
-            return (new OAuthServerException('Server error.', 0, 'unknown_error', 500))
-                ->generateHttpResponse($this->response->createResponse());
         }
     }
 }
