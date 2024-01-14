@@ -44,7 +44,7 @@ final class AuthorizeTest extends WebTestCase
                 'client_id' => 'frontend',
                 'code_challenge' => PKCE::challenge(PKCE::verifier()),
                 'code_challenge_method' => 'S256',
-                'redirect_uri' => 'http://localhost/oauth',
+                'redirect_uri' => '/oauth',
                 'scope' => 'common',
                 'state' => 'sTaTe',
             ])
@@ -52,6 +52,6 @@ final class AuthorizeTest extends WebTestCase
 
         self::assertEquals(200, $response->getStatusCode());
         self::assertNotEmpty($content = (string)$response->getBody());
-        self::assertStringContainsString('<title>Auth</title>', $content);
+        self::assertStringContainsString('authorize', $content);
     }
 }

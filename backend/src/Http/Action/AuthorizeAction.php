@@ -33,22 +33,24 @@ final class AuthorizeAction implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+
         try {
             $authRequest = $this->server->validateAuthorizationRequest($request);
-
+            
             if ($request->getMethod() === 'POST') {
-                // Формируем авторизационный код
-                $authRequest->setUser(new User('123'));
+
+                
+                $authRequest->setUser(new User('00000000-0000-0000-0000-000000000001'));
                 $authRequest->setAuthorizationApproved(true);
+
                 return $this->server->completeAuthorizationRequest($authRequest, $this->response->createResponse());
             }
 
             return new HtmlResponse(
-                'html',
+                'authorize'
             );
         } catch (OAuthServerException $exception) {
-            $this->logger->warning(
-                $exception->getMessage(), [
+            $this->logger->warning($exception->getMessage(), [
                     'exception' => $exception,
                     'url' => (string) $request->getUri(),
                     'ip' => (\array_key_exists('REMOTE_ADDR', $request->getServerParams())) ? (string) $request->getServerParams()['REMOTE_ADDR'] : null,]
