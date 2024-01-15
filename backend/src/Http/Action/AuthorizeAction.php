@@ -6,7 +6,6 @@ namespace App\Http\Action;
 
 use App\Http\Response\HtmlResponse;
 use App\OAuth\Entity\User;
-use Exception;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -36,10 +35,10 @@ final class AuthorizeAction implements RequestHandlerInterface
 
         try {
             $authRequest = $this->server->validateAuthorizationRequest($request);
-            
+
             if ($request->getMethod() === 'POST') {
 
-                
+
                 $authRequest->setUser(new User('00000000-0000-0000-0000-000000000001'));
                 $authRequest->setAuthorizationApproved(true);
 
@@ -50,7 +49,9 @@ final class AuthorizeAction implements RequestHandlerInterface
                 'authorize'
             );
         } catch (OAuthServerException $exception) {
-            $this->logger->warning($exception->getMessage(), [
+            $this->logger->warning(
+                $exception->getMessage(),
+                [
                     'exception' => $exception,
                     'url' => (string) $request->getUri(),
                     'ip' => (\array_key_exists('REMOTE_ADDR', $request->getServerParams())) ? (string) $request->getServerParams()['REMOTE_ADDR'] : null,]

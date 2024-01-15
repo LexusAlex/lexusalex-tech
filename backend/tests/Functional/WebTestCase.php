@@ -27,7 +27,7 @@ abstract class WebTestCase extends TestCase
 
     private function container(): ContainerInterface
     {
-        $dependencies = (require __DIR__ . '/../../src/Configurations/Main/dependencies.php')((__DIR__. '/../../src'));
+        $dependencies = (require __DIR__ . '/../../src/Configurations/Main/dependencies.php')((__DIR__ . '/../../src'));
         /** @var ContainerInterface */
         return (require __DIR__ . '/../../src/Configurations/Main/container.php')($dependencies);
     }

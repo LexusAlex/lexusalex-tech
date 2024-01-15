@@ -28,7 +28,7 @@ final class AuthorizeTest extends WebTestCase
         ));
 
         self::assertEquals(401, $response->getStatusCode());
-        self::assertJson($content = (string)$response->getBody());
+        self::assertJson($content = (string) $response->getBody());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 
@@ -51,7 +51,7 @@ final class AuthorizeTest extends WebTestCase
         ));
 
         self::assertEquals(200, $response->getStatusCode());
-        self::assertNotEmpty($content = (string)$response->getBody());
+        self::assertNotEmpty($content = (string) $response->getBody());
         self::assertStringContainsString('authorize', $content);
     }
 }

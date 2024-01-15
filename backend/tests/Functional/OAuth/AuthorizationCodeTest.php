@@ -7,8 +7,8 @@ namespace Test\Functional\OAuth;
 use DateTimeImmutable;
 use Defuse\Crypto\Crypto;
 use Test\Functional\WebTestCase;
-use function App\Configurations\Main\environment;
 
+use function App\Configurations\Main\environment;
 
 final class AuthorizationCodeTest extends WebTestCase
 {
@@ -41,7 +41,7 @@ final class AuthorizationCodeTest extends WebTestCase
 
         self::assertEquals(200, $response->getStatusCode());
 
-        self::assertJson($content = (string)$response->getBody());
+        self::assertJson($content = (string) $response->getBody());
 
         $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 

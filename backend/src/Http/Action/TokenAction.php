@@ -19,8 +19,7 @@ final class TokenAction implements RequestHandlerInterface
         private readonly AuthorizationServer $server,
         private LoggerInterface $logger,
         private ResponseFactoryInterface $response,
-    ) {
-    }
+    ) {}
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
@@ -28,14 +27,18 @@ final class TokenAction implements RequestHandlerInterface
         try {
             return $this->server->respondToAccessTokenRequest($request, $response);
         } catch (OAuthServerException $exception) {
-            $this->logger->warning($exception->getMessage(), [
+            $this->logger->warning(
+                $exception->getMessage(),
+                [
                 'exception' => $exception,
                 'url' => (string) $request->getUri(),
                 'ip' => (\array_key_exists('REMOTE_ADDR', $request->getServerParams())) ? (string) $request->getServerParams()['REMOTE_ADDR'] : null,]
             );
             return $exception->generateHttpResponse($response);
         } catch (Exception $exception) {
-            $this->logger->error($exception->getMessage(), [
+            $this->logger->error(
+                $exception->getMessage(),
+                [
                 'exception' => $exception,
                 'url' => (string) $request->getUri(),
                 'ip' => (\array_key_exists('REMOTE_ADDR', $request->getServerParams())) ? (string) $request->getServerParams()['REMOTE_ADDR'] : null,]
