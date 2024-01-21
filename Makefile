@@ -2,7 +2,9 @@
 init: docker backend
 docker: docker-build docker-up
 backend: composer-install
+frontend: npm-install
 check: backend-phpunit backend-php-cs-fixer
+be-updated: composer-be-updated-all npm-be-updated-all
 # docker
 docker-build:
 	docker compose build --pull
@@ -26,3 +28,10 @@ backend-run-migrate:
 	docker compose run --rm backend-php-cli composer phinx migrate -- --configuration etc/phinx.php
 backend-rollback-migrate:
 	docker compose run --rm backend-php-cli composer phinx rollback -- --configuration etc/phinx.php
+# npm
+npm-install:
+	docker compose run --rm frontend-node-cli npm install
+npm-list:
+	docker compose run --rm frontend-node-cli npm list --depth=0
+npm-be-updated-all:
+	docker compose run --rm frontend-node-cli npm outdated --depth=99999

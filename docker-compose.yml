@@ -63,6 +63,30 @@ services:
             - ./:/lexusalex-tech
         ports:
             - "5432:5432"
+    frontend-node-cli:
+        build:
+          context: frontend/docker
+          dockerfile: frontend-node/Dockerfile
+        volumes:
+          - ./:/lexusalex-tech
+    frontend-nginx:
+        build:
+          context: frontend/docker
+          dockerfile: frontend-nginx/Dockerfile
+        ports:
+           - "80:80"
+        depends_on:
+           - frontend-node
+    frontend-node:
+        build:
+          context: frontend/docker
+          dockerfile: frontend-node/Dockerfile
+        environment:
+          NODE_ENV: development
+        volumes:
+          - ./:/lexusalex-tech
+        command: npm run dev
+        tty: true
 secrets:
     jwt_public.key:
         file: ./backend/docker/secrets/jwt_public.key
