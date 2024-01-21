@@ -38,3 +38,5 @@ docker compose run --rm backend-php-cli composer require league/oauth2-server
 Что сделать при деплое
 поставить 777 backend/var/log/
 chmod ugo+r jwt_private.key
+// Аутентификация в next
+https://www.youtube.com/watch?v=GgG3mi4Iqhw
