@@ -20,6 +20,8 @@ composer-be-updated-all:
 # backend
 backend-phpunit:
 	docker compose run --rm backend-php-cli composer phpunit
+backend-phpunit-coverage:
+	docker compose run --rm backend-php-cli composer phpunit-coverage
 backend-php-cs-fixer:
 	docker compose run --rm backend-php-cli composer php-cs-fixer
 backend-create-migrate:
