@@ -28,6 +28,7 @@
         </include>
         <exclude>
             <directory suffix=".php">../src/Configurations/Test</directory>
+            <directory suffix=".php">../src/Configurations/Configuration</directory>
             <directory suffix=".php">../src/Http/Test</directory>
         </exclude>
     </source>
