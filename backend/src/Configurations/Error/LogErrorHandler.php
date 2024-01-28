@@ -6,6 +6,9 @@ namespace App\Configurations\Error;
 
 use Slim\Handlers\ErrorHandler;
 
+/**
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 final class LogErrorHandler extends ErrorHandler
 {
     protected function writeToErrorLog(): void

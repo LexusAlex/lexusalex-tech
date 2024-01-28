@@ -3,7 +3,7 @@ init: docker backend
 docker: docker-build docker-up
 backend: composer-install
 frontend: npm-install
-check: backend-phpunit backend-php-cs-fixer
+check: backend-phpunit backend-php-cs-fixer backend-psalm
 be-updated: composer-be-updated-all npm-be-updated-all
 # docker
 docker-build:
@@ -30,6 +30,8 @@ backend-run-migrate:
 	docker compose run --rm backend-php-cli composer phinx migrate -- --configuration etc/phinx.php
 backend-rollback-migrate:
 	docker compose run --rm backend-php-cli composer phinx rollback -- --configuration etc/phinx.php
+backend-psalm:
+	docker compose run --rm backend-php-cli composer psalm
 # npm
 npm-install:
 	docker compose run --rm frontend-node-cli npm install
