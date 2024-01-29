@@ -32,6 +32,8 @@ backend-rollback-migrate:
 	docker compose run --rm backend-php-cli composer phinx rollback -- --configuration etc/phinx.php
 backend-psalm:
 	docker compose run --rm backend-php-cli composer psalm
+backend-infection:
+	docker compose run --rm backend-php-cli composer infection
 # npm
 npm-install:
 	docker compose run --rm frontend-node-cli npm install
