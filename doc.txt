@@ -40,3 +40,8 @@ docker compose run --rm backend-php-cli composer require league/oauth2-server
 chmod ugo+r jwt_private.key
 // Аутентификация в next
 https://www.youtube.com/watch?v=GgG3mi4Iqhw
+
+
+
+$this->logger->error($this->exception->getMessage(), ['exception' => $this->exception, 'url' => (string) $this->request->getUri(), 'ip' => isset($this->request->getServerParams()['REMOTE_ADDR']) ? $this->request->getServerParams()['REMOTE_ADDR'] : null]);
+$this->logger->error($this->exception->getMessage(), ['exception' => $this->exception, 'url' => $this->request->getUri(), 'ip' => isset($this->request->getServerParams()['REMOTE_ADDR']) ? $this->request->getServerParams()['REMOTE_ADDR'] : null]);

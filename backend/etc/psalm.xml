@@ -9,6 +9,11 @@
     findUnusedCode="true"
     cacheDirectory="../var/cache/.psalm"
 >
+    <plugins>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+        <pluginClass class="Lctrs\PsalmPsrContainerPlugin\Plugin"/>
+    </plugins>
+
     <projectFiles>
         <directory name="../src" />
         <directory name="../public" />
@@ -18,10 +23,7 @@
             <directory name="../src/Configurations/Migrations" />
         </ignoreFiles>
     </projectFiles>
-    <plugins>
-        <pluginClass class="Psalm\PhpUnitPlugin\Plugin" />
-        <pluginClass class="Lctrs\PsalmPsrContainerPlugin\Plugin"/>
-    </plugins>
+
     <issueHandlers>
         <PossiblyUnusedMethod errorLevel="info" />
     </issueHandlers>

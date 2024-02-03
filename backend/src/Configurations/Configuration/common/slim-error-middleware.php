@@ -30,6 +30,10 @@ return [
             new LogErrorHandler($callableResolver, $responseFactory, $logger),
         );
 
+
+        $defaultHandler = $middleware->getDefaultErrorHandler();
+        $defaultHandler->forceContentType('application/json');
+
         return $middleware;
     },
 ];
