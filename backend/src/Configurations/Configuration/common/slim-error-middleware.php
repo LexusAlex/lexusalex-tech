@@ -6,6 +6,7 @@ use App\Configurations\Error\LogErrorHandler;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Log\LoggerInterface;
+use Slim\Handlers\ErrorHandler;
 use Slim\Interfaces\CallableResolverInterface;
 use Slim\Middleware\ErrorMiddleware;
 
@@ -30,8 +31,11 @@ return [
             new LogErrorHandler($callableResolver, $responseFactory, $logger),
         );
 
-
+        /**
+         * @var ErrorHandler $defaultHandler
+         */
         $defaultHandler = $middleware->getDefaultErrorHandler();
+
         $defaultHandler->forceContentType('application/json');
 
         return $middleware;
