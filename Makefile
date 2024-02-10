@@ -41,3 +41,8 @@ npm-list:
 	docker compose run --rm frontend-node-cli npm list --depth=0
 npm-be-updated-all:
 	docker compose run --rm frontend-node-cli npm outdated --depth=99999
+# frontend
+frontend-jest:
+	docker compose run --rm frontend-node-cli npm run test
+frontend-jest-coverage:
+	docker compose run --rm frontend-node-cli npm run test:coverage
