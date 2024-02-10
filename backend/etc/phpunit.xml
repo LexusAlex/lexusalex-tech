@@ -10,6 +10,7 @@
 >
     <testsuites>
         <testsuite name="unit">
+            <directory>../src/Authentication/Test</directory>
             <directory>../src/Configurations/Test</directory>
             <directory>../src/Http/Test</directory>
         </testsuite>
@@ -27,6 +28,7 @@
             <directory suffix=".php">../src</directory>
         </include>
         <exclude>
+            <directory suffix=".php">../src/Authentication/Test</directory>
             <directory suffix=".php">../src/Configurations/Test</directory>
             <directory suffix=".php">../src/Configurations/Configuration</directory>
             <directory suffix=".php">../src/Http/Test</directory>

@@ -6,6 +6,7 @@
         ],
         "excludes": [
             "Configurations/Test",
+            "Authentication/Test",
             "Configurations/Migrations",
             "Http/Test",
         ]

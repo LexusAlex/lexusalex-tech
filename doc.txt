@@ -44,6 +44,7 @@ https://www.youtube.com/watch?v=GgG3mi4Iqhw
 
 npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom
 https://www.youtube.com/watch?v=sjdMBJ72M4s
+https://deworker.pro/edu/series/interactive-site/e2e-tests
 
 $this->logger->error($this->exception->getMessage(), ['exception' => $this->exception, 'url' => (string) $this->request->getUri(), 'ip' => isset($this->request->getServerParams()['REMOTE_ADDR']) ? $this->request->getServerParams()['REMOTE_ADDR'] : null]);
 $this->logger->error($this->exception->getMessage(), ['exception' => $this->exception, 'url' => $this->request->getUri(), 'ip' => isset($this->request->getServerParams()['REMOTE_ADDR']) ? $this->request->getServerParams()['REMOTE_ADDR'] : null]);
