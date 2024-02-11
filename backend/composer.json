@@ -42,6 +42,7 @@
     "webmozart/assert": "^1.11"
   },
   "require-dev": {
+    "dg/bypass-finals": "^1.5",
     "friendsofphp/php-cs-fixer": "^3.46",
     "infection/infection": "^0.27.9",
     "lctrs/psalm-psr-container-plugin": "^1.10",

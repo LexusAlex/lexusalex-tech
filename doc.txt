@@ -41,6 +41,48 @@ chmod ugo+r jwt_private.key
 // Аутентификация в next
 https://www.youtube.com/watch?v=GgG3mi4Iqhw
 
+Функциональные тесты запускать только в dev режиме
+Как можно сделать фикстуры
+protected function setUp(): void
+    {
+        parent::setUp();
+
+        /** @var ContainerInterface $container */
+        $container = $this->application()->getContainer();
+        /** @var Connection $connection */
+        $connection = $container->get(Connection::class);
+        /** @var RequestFixture $fixture */
+        $fixture = $container->get(RequestFixture::class);
+        $results = $fixture->load();
+        foreach ($results as $result) {
+            $connection->createQueryBuilder()
+                ->insert('authentication_users')
+                ->values(
+                    [
+                        'id' => ':id',
+                        'email' => ':email',
+                    ]
+                )
+                ->setParameter('id', $result['id'])
+                ->setParameter('email', $result['email'])
+                ->executeQuery();
+        }
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        /** @var ContainerInterface $container */
+        $container = $this->application()->getContainer();
+        /** @var Connection $connection */
+        $connection = $container->get(Connection::class);
+        $connection->createQueryBuilder()->delete('authentication_users')
+            ->where('id = ?')
+            ->setParameter(0, '018d980e-c8f8-7015-ba0f-a3edff3243df')
+            ->executeQuery();
+
+    }
+
 
 npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom
 https://www.youtube.com/watch?v=sjdMBJ72M4s

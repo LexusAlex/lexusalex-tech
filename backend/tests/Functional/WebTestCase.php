@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Test\Functional;
 
+use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -56,5 +57,16 @@ abstract class WebTestCase extends TestCase
             ->withHeader('Content-Type', 'application/x-www-form-urlencoded');
         $request->getBody()->write(http_build_query($body));
         return $request;
+    }
+
+    protected function removeTestUser(): void
+    {
+        /** @var ContainerInterface $container */
+        $container = $this->application()->getContainer();
+        $connection = $container->get(Connection::class);
+        $connection->createQueryBuilder()->delete('authentication_users')
+            ->where('email = ?')
+            ->setParameter(0, 'new-user@lexusalex.tech')
+            ->executeQuery();
     }
 }
