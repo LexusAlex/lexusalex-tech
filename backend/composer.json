@@ -39,6 +39,7 @@
     "robmorgan/phinx": "^0.16.0",
     "slim/psr7": "^1.6",
     "slim/slim": "^4.12",
+    "symfony/console": "^7.0",
     "webmozart/assert": "^1.11"
   },
   "require-dev": {
@@ -57,6 +58,7 @@
     "php-cs-fixer": "php-cs-fixer fix --allow-risky=yes --config etc/.php-cs-fixer.php --diff",
     "phinx": "phinx",
     "psalm": "psalm --config=etc/psalm.xml",
+    "app": "php bin/app.php --ansi",
     "infection": "infection --show-mutations --log-verbosity=default --threads=4 --coverage=../var/log --configuration=etc/infection.json5"
   }
 }

@@ -15,6 +15,7 @@
     </plugins>
 
     <projectFiles>
+        <directory name="../bin" />
         <directory name="../src" />
         <directory name="../public" />
         <directory name="../tests" />

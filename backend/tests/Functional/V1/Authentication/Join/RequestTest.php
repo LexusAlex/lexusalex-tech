@@ -41,14 +41,8 @@ final class RequestTest extends WebTestCase
 
     public function testExisting(): void
     {
-
-        $this->application()->handle(self::json('POST', '/v1/authentication/join', [
-            'email' => 'new-user@lexusalex.tech',
-            'password' => 'new-password',
-        ]));
-
         $response = $this->application()->handle(self::json('POST', '/v1/authentication/join', [
-            'email' => 'new-user@lexusalex.tech',
+            'email' => 'user@lexusalex.tech',
             'password' => 'new-password',
         ]));
 
@@ -58,8 +52,6 @@ final class RequestTest extends WebTestCase
         self::assertEquals([
             'message' => 'User already exists.',
         ], Json::decode($body));
-
-        $this->removeTestUser();
     }
 
 }

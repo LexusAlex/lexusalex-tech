@@ -1,7 +1,7 @@
 # main
-init: docker backend
+init: docker backend frontend
 docker: docker-build docker-up
-backend: composer-install
+backend: composer-install backend-load-fixtures
 frontend: npm-install
 check: backend-phpunit backend-php-cs-fixer backend-psalm
 be-updated: composer-be-updated-all npm-be-updated-all
@@ -36,6 +36,8 @@ backend-psalm:
 	docker compose run --rm backend-php-cli composer psalm
 backend-infection:
 	docker compose run --rm backend-php-cli composer infection
+backend-load-fixtures:
+	docker compose run --rm backend-php-cli composer run app fixtures:load
 # npm
 npm-install:
 	docker compose run --rm frontend-node-cli npm install
