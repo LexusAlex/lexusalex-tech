@@ -83,6 +83,10 @@ protected function setUp(): void
 
     }
 
+1. Накатывание общих фикстур
+2. Очистка
+3. Накатка фикстур для каждого теста
+4. Восстановление фикстур после запуска тестов
 
 npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom
 https://www.youtube.com/watch?v=sjdMBJ72M4s
