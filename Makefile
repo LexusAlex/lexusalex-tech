@@ -1,7 +1,7 @@
 # main
 init: docker backend frontend
 docker: docker-build docker-up
-backend: composer-install backend-load-fixtures
+backend: composer-install backend-run-migrate backend-load-fixtures
 frontend: npm-install
 check: backend-phpunit backend-load-fixtures backend-php-cs-fixer backend-psalm
 be-updated: composer-be-updated-all npm-be-updated-all
