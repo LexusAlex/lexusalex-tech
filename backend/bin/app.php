@@ -3,9 +3,9 @@
 
 declare(strict_types=1);
 
-use App\Configurations\Cli\LoadFixturesCommand;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\Command;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -16,6 +16,15 @@ $container = (require __DIR__ . '/../src/Configurations/Main/container.php')($de
 
 $cli = new Application('Console');
 
-$cli->add((new LoadFixturesCommand($container)));
+/**
+ * @var string[] $commands
+ * @psalm-suppress MixedArrayAccess
+ */
+$commands = $container->get('configurations')['symfony']['console']['commands'];
 
+foreach ($commands as $name) {
+    /** @var Command $command */
+    $command = $container->get($name);
+    $cli->add($command);
+}
 $cli->run();
