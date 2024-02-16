@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Configurations\Cli;
 
-use Doctrine\DBAL\Connection;
+use App\Authentication\Fixture\UserFixture;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,11 +12,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class LoadFixturesCommand extends Command
 {
-    private Connection $connection;
+    private ContainerInterface $container;
     public function __construct(ContainerInterface $container)
     {
         parent::__construct();
-        $this->connection = $container->get(Connection::class);
+        $this->container = $container;
     }
     protected function configure(): void
     {
@@ -27,17 +27,12 @@ final class LoadFixturesCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('<comment>Loading fixtures</comment>');
-        $this->connection->createQueryBuilder()
-            ->insert('authentication_users')
-            ->values(
-                [
-                    'id' => ':id',
-                    'email' => ':email',
-                ]
-            )
-            ->setParameter('id', '018d980e-c8f8-7015-ba0f-a3edff3243df')
-            ->setParameter('email', 'user@lexusalex.tech')
-            ->executeQuery();
+
+        $fixtures = [UserFixture::class];
+
+        foreach ($fixtures as $fixture) {
+            $this->container->get($fixture)->load();
+        }
         $output->writeln('<info>Done!</info>');
         return 0;
     }
