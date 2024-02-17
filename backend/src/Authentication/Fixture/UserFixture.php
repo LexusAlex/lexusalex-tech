@@ -17,6 +17,7 @@ final class UserFixture
 
     public function load(): void
     {
+        $this->connection->executeQuery('TRUNCATE authentication_users');
         $this->connection->createQueryBuilder()
             ->insert('authentication_users')
             ->values(
