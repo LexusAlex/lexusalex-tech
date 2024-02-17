@@ -1,3 +1,4 @@
+import "@/assets/css/styles.scss";
 import {Montserrat} from "next/font/google";
 
 const Font = Montserrat({ subsets: ['cyrillic-ext','latin','cyrillic'] })
