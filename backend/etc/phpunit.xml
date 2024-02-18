@@ -29,9 +29,11 @@
         </include>
         <exclude>
             <directory suffix=".php">../src/Authentication/Test</directory>
+            <directory suffix=".php">../src/Authentication/Fixture</directory>
             <directory suffix=".php">../src/Configurations/Test</directory>
             <directory suffix=".php">../src/Configurations/Configuration</directory>
             <directory suffix=".php">../src/Configurations/Migrations</directory>
+            <directory suffix=".php">../src/Configurations/Cli</directory>
             <directory suffix=".php">../src/Http/Test</directory>
             <directory suffix=".php">../tests/Functional</directory>
         </exclude>

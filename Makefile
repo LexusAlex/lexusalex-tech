@@ -7,6 +7,7 @@ check: test backend-php-cs-fixer backend-psalm
 be-updated: composer-be-updated-all npm-be-updated-all
 test: backend-phpunit backend-load-fixtures
 test-coverage: backend-phpunit-coverage backend-load-fixtures
+infection:backend-infection backend-load-fixtures
 # docker
 docker-build:
 	docker compose build --pull

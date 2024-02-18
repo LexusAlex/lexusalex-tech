@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Test\Functional\V1\Authentication\Join;
 
-use Doctrine\DBAL\Connection;
+use App\Authentication\Entity\User\Types\Email;
+use App\Authentication\Entity\User\UserRepository;
 use Psr\Container\ContainerInterface;
 use Test\Functional\Json;
+use Test\Functional\V1\Authentication\Join\Fixtures\RequestFixture;
+use Test\Functional\V1\Authentication\Join\Fixtures\RequestFixtureTruncate;
 use Test\Functional\WebTestCase;
 
 final class RequestTest extends WebTestCase
@@ -14,33 +17,18 @@ final class RequestTest extends WebTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        // Чистим бд
         /** @var ContainerInterface $container */
         $container = $this->application()->getContainer();
-        $connection = $container->get(Connection::class);
-        $connection->executeQuery('TRUNCATE authentication_users');
-        // Добавляем
-        $connection->createQueryBuilder()
-            ->insert('authentication_users')
-            ->values(
-                [
-                    'id' => ':id',
-                    'email' => ':email',
-                ]
-            )
-            ->setParameter('id', '018d980e-c8f8-7015-ba0f-a3edff3243d5')
-            ->setParameter('email', 'existing@lexusalex.tech')
-            ->executeQuery();
+        $container->get(RequestFixture::class)->load();
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
-        // Чистим бд
         /** @var ContainerInterface $container */
         $container = $this->application()->getContainer();
-        $connection = $container->get(Connection::class);
-        $connection->executeQuery('TRUNCATE authentication_users');
+        $container->get(RequestFixtureTruncate::class)->load();
+
     }
 
     public function testMethod(): void
@@ -57,6 +45,10 @@ final class RequestTest extends WebTestCase
             'password' => 'new-password',
         ]));
 
+        /** @var ContainerInterface $container */
+        $container = $this->application()->getContainer();
+
+        self::assertTrue($container->get(UserRepository::class)->hasByEmail(new Email('new-user@lexusalex.tech')));
         self::assertEquals(201, $response->getStatusCode());
         self::assertEquals('', (string) $response->getBody());
 
