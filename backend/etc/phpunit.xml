@@ -14,6 +14,12 @@
             <directory>../src/Configurations/Test</directory>
             <directory>../src/Http/Test</directory>
         </testsuite>
+        <testsuite name="authentication">
+            <directory>../src/Authentication/Test</directory>
+        </testsuite>
+        <testsuite name="http">
+            <directory>../src/Http/Test</directory>
+        </testsuite>
         <testsuite name="functional">
             <directory>../tests/Functional</directory>
         </testsuite>

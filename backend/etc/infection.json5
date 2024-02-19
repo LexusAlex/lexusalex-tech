@@ -7,10 +7,10 @@
         "excludes": [
             "Configurations/Test",
             "Authentication/Test",
+            "Http/Test",
             "Authentication/Fixture",
             "Configurations/Migrations",
             "Configurations/Cli",
-            "Http/Test",
         ]
     },
     "logs": {

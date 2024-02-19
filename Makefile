@@ -25,6 +25,10 @@ backend-phpunit:
 	docker compose run --rm backend-php-cli composer phpunit
 backend-phpunit-unit:
 	docker compose run --rm backend-php-cli composer phpunit -- --testsuite unit
+backend-phpunit-authentication:
+	docker compose run --rm backend-php-cli composer phpunit -- --testsuite authentication
+backend-phpunit-http:
+	docker compose run --rm backend-php-cli composer phpunit -- --testsuite http
 backend-phpunit-coverage:
 	docker compose run --rm backend-php-cli composer phpunit-coverage
 backend-php-cs-fixer:
