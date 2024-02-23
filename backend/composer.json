@@ -54,6 +54,8 @@
   },
   "scripts": {
     "phpunit": "phpunit --colors=always --configuration=etc/phpunit.xml",
+    "phpunit-authentication": "phpunit --colors=always --configuration=etc/phpunit.xml src/Authentication/Test",
+    "phpunit-http": "phpunit --colors=always --configuration=etc/phpunit.xml src/Http/Test",
     "phpunit-coverage": "phpunit --colors=always --configuration=etc/phpunit.xml --coverage-html var/log/coverage --coverage-xml=var/log/coverage-xml --log-junit=var/log/junit.xml",
     "php-cs-fixer": "php-cs-fixer fix --allow-risky=yes --config etc/.php-cs-fixer.php --diff",
     "phinx": "phinx",

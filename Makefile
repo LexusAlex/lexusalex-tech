@@ -1,7 +1,7 @@
 # main
 init: docker backend frontend
 docker: docker-build docker-up
-backend: composer-install backend-run-migrate backend-load-fixtures
+backend: backend-clear-var composer-install backend-run-migrate backend-load-fixtures
 frontend: npm-install
 check: test backend-php-cs-fixer backend-psalm
 be-updated: composer-be-updated-all npm-be-updated-all
@@ -26,9 +26,9 @@ backend-phpunit:
 backend-phpunit-unit:
 	docker compose run --rm backend-php-cli composer phpunit -- --testsuite unit
 backend-phpunit-authentication:
-	docker compose run --rm backend-php-cli composer phpunit -- --testsuite authentication
+	docker compose run --rm backend-php-cli composer phpunit-authentication
 backend-phpunit-http:
-	docker compose run --rm backend-php-cli composer phpunit -- --testsuite http
+	docker compose run --rm backend-php-cli composer phpunit-http
 backend-phpunit-coverage:
 	docker compose run --rm backend-php-cli composer phpunit-coverage
 backend-php-cs-fixer:
@@ -45,6 +45,8 @@ backend-infection:
 	docker compose run --rm backend-php-cli composer infection
 backend-load-fixtures:
 	docker compose run --rm backend-php-cli composer run app fixtures:load
+backend-clear-var:
+	docker compose run --rm backend-php-cli sh -c 'rm -rf var/cache/* var/log/*'
 # npm
 npm-install:
 	docker compose run --rm frontend-node-cli npm install
