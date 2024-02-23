@@ -3,7 +3,7 @@ init: docker backend frontend
 docker: docker-build docker-up
 backend: backend-clear-var composer-install backend-run-migrate backend-load-fixtures
 frontend: npm-install
-check: test backend-php-cs-fixer backend-psalm
+check: backend-phplint test backend-php-cs-fixer backend-psalm
 be-updated: composer-be-updated-all npm-be-updated-all
 test: backend-phpunit backend-load-fixtures
 test-coverage: backend-phpunit-coverage backend-load-fixtures
@@ -47,6 +47,8 @@ backend-load-fixtures:
 	docker compose run --rm backend-php-cli composer run app fixtures:load
 backend-clear-var:
 	docker compose run --rm backend-php-cli sh -c 'rm -rf var/cache/* var/log/*'
+backend-phplint:
+	docker compose run --rm backend-php-cli composer phplint
 # npm
 npm-install:
 	docker compose run --rm frontend-node-cli npm install
