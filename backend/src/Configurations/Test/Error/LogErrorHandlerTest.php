@@ -14,7 +14,7 @@ use Slim\Psr7\Factory\ServerRequestFactory;
 
 final class LogErrorHandlerTest extends TestCase
 {
-    public function testCreateApplication(): void
+    public function testCreateError(): void
     {
         $dependencies = (require __DIR__ . '/../../Main/dependencies.php')((__DIR__ . '/../../../../src'));
 
