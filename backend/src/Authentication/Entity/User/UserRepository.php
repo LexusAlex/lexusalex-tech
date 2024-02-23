@@ -18,7 +18,7 @@ final class UserRepository
     public function hasByEmail(Email $email): bool
     {
         $result = $this->connection->createQueryBuilder()
-            ->select('id', 'email')
+            ->select('email')
             ->from('authentication_users')
             ->where('email = :email')
             ->setParameter('email', $email->getValue())
@@ -29,6 +29,19 @@ final class UserRepository
 
     }
 
+    public function getUserByEmail(Email $email): array|bool
+    {
+        $result = $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from('authentication_users')
+            ->where('email = :email')
+            ->setParameter('email', $email->getValue())
+            ->executeQuery()
+            ->fetchAssociative();
+
+        return $result;
+    }
+
     public function add(User $user): void
     {
         $this->connection->createQueryBuilder()
@@ -37,10 +50,12 @@ final class UserRepository
                 [
                     'id' => ':id',
                     'email' => ':email',
+                    'password_hash' => ':password_hash',
                 ]
             )
             ->setParameter('id', $user->getId())
             ->setParameter('email', $user->getEmail()->getValue())
+            ->setParameter('password_hash', $user->getPasswordHash())
             ->executeQuery();
     }
 

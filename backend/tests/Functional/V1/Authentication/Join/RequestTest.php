@@ -6,6 +6,7 @@ namespace Test\Functional\V1\Authentication\Join;
 
 use App\Authentication\Entity\User\Types\Email;
 use App\Authentication\Entity\User\UserRepository;
+use App\Authentication\Service\PasswordHasher;
 use Psr\Container\ContainerInterface;
 use Test\Functional\Json;
 use Test\Functional\V1\Authentication\Join\Fixtures\RequestFixture;
@@ -48,7 +49,16 @@ final class RequestTest extends WebTestCase
         /** @var ContainerInterface $container */
         $container = $this->application()->getContainer();
 
-        self::assertTrue($container->get(UserRepository::class)->hasByEmail(new Email('new-user@lexusalex.tech')));
+        $email = new Email('new-user@lexusalex.tech');
+
+        self::assertTrue($container->get(UserRepository::class)->hasByEmail($email));
+        /**
+         * @psalm-var array{id :string,email: string, password_hash: string} $user
+         */
+        $user = $container->get(UserRepository::class)->getUserByEmail($email);
+        $password_hasher = new PasswordHasher();
+        self::assertTrue($password_hasher->validate('new-password', $user['password_hash']));
+
         self::assertEquals(201, $response->getStatusCode());
         self::assertEquals('', (string) $response->getBody());
 
@@ -66,6 +76,58 @@ final class RequestTest extends WebTestCase
 
         self::assertEquals([
             'message' => 'User already exists.',
+        ], Json::decode($body));
+    }
+
+    public function testEmptyBody(): void
+    {
+        $response = $this->application()->handle(self::json('POST', '/v1/authentication/join', []));
+
+        self::assertEquals(422, $response->getStatusCode());
+
+        self::assertJson($body = (string) $response->getBody());
+
+        self::assertEquals([
+            'errors' => [
+                'email' => 'This value should not be blank.',
+                'password' => 'This value should not be blank.',
+            ],
+        ], Json::decode($body));
+    }
+
+    public function testEmptyFields(): void
+    {
+        $response = $this->application()->handle(self::json('POST', '/v1/authentication/join', [
+            'email' => '',
+            'password' => '',
+        ]));
+
+        self::assertEquals(422, $response->getStatusCode());
+        self::assertJson($body = (string) $response->getBody());
+
+        self::assertEquals([
+            'errors' => [
+                'email' => 'This value should not be blank.',
+                'password' => 'This value should not be blank.',
+            ],
+        ], Json::decode($body));
+    }
+
+    public function testNotValid(): void
+    {
+        $response = $this->application()->handle(self::json('POST', '/v1/authentication/join', [
+            'email' => 'not-email',
+            'password' => 'new',
+        ]));
+
+        self::assertEquals(422, $response->getStatusCode());
+        self::assertJson($body = (string) $response->getBody());
+
+        self::assertEquals([
+            'errors' => [
+                'email' => 'This value is not a valid email address.',
+                'password' => 'This value is too short. It should have 6 characters or more.',
+            ],
         ], Json::decode($body));
     }
 

@@ -6,6 +6,7 @@ namespace App\Http\Action\V1\Authentication\Join;
 
 use App\Authentication\Command\JoinByEmail\Request\Command;
 use App\Authentication\Command\JoinByEmail\Request\Handler;
+use App\Configurations\Validator\Validator;
 use App\Http\Response\EmptyResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -14,7 +15,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 final class RequestAction implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly Handler $handler
+        private readonly Handler $handler,
+        private readonly Validator $validator,
     ) {}
 
     public function handle(ServerRequestInterface $request): ResponseInterface
@@ -27,6 +29,8 @@ final class RequestAction implements RequestHandlerInterface
         $command = new Command();
         $command->email = $data['email'] ?? '';
         $command->password = $data['password'] ?? '';
+
+        $this->validator->validate($command);
 
         $this->handler->handle($command);
 

@@ -29,6 +29,10 @@ backend-phpunit-authentication:
 	docker compose run --rm backend-php-cli composer phpunit-authentication
 backend-phpunit-http:
 	docker compose run --rm backend-php-cli composer phpunit-http
+backend-phpunit-configurations:
+	docker compose run --rm backend-php-cli composer phpunit-configurations
+backend-phpunit-functional:
+	docker compose run --rm backend-php-cli composer phpunit-functional
 backend-phpunit-coverage:
 	docker compose run --rm backend-php-cli composer phpunit-coverage
 backend-php-cs-fixer:
