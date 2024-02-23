@@ -16,10 +16,12 @@ final class RequestTest extends TestCase
         $user = User::requestJoinByEmail(
             $id = Id::generate(),
             $email = new Email('mail@example.com'),
+            $hash = 'hash',
         );
 
         self::assertEquals($id, $user->getId());
         self::assertEquals($email, $user->getEmail());
+        self::assertEquals($hash, $user->getPasswordHash());
 
     }
 }

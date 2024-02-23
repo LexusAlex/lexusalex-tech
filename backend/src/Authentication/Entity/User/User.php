@@ -13,6 +13,8 @@ final class User
 
     private Email $email;
 
+    private ?string $passwordHash = null;
+
     private function __construct(Id $id, Email $email)
     {
         $this->id = $id;
@@ -29,10 +31,18 @@ final class User
         return $this->email;
     }
 
+    public function getPasswordHash(): ?string
+    {
+        return $this->passwordHash;
+    }
+
     public static function requestJoinByEmail(
         Id $id,
-        Email $email
+        Email $email,
+        string $passwordHash,
     ): self {
-        return new self($id, $email);
+        $user = new self($id, $email);
+        $user->passwordHash = $passwordHash;
+        return $user;
     }
 }

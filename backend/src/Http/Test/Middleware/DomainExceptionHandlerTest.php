@@ -35,6 +35,7 @@ final class DomainExceptionHandlerTest extends TestCase
         $logger = $this->createMock(LoggerInterface::class);
         $logger->expects(self::once())->method('warning')
             ->willReturnCallback(static function (string $error, array $context): void {
+                self::assertEquals('', $context['url']);
                 self::assertEquals('Some error.', $error);
                 self::assertNull($context['ip']);
                 self::assertArrayHasKey('exception', $context);

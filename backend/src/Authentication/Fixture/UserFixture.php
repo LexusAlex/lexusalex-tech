@@ -9,6 +9,7 @@ use Psr\Container\ContainerInterface;
 
 final class UserFixture
 {
+    private const PASSWORD_HASH = '$argon2i$v=19$m=16,t=4,p=1$TEEvQkF6dGRWZmRGbmFHNA$4ga3MX6bI5AnDNwfTUw3lTVmJlBggT9/fvjF4tOuxrM';
     private Connection $connection;
     public function __construct(ContainerInterface $container)
     {
@@ -24,10 +25,12 @@ final class UserFixture
                 [
                     'id' => ':id',
                     'email' => ':email',
+                    'password_hash' => ':password_hash',
                 ]
             )
-            ->setParameter('id', '018d980e-c8f8-7015-ba0f-a3edff3243df')
+            ->setParameter('id', '00000000-0000-0000-0000-000000000001')
             ->setParameter('email', 'user@lexusalex.tech')
+            ->setParameter('password_hash', self::PASSWORD_HASH)
             ->executeQuery();
     }
 }

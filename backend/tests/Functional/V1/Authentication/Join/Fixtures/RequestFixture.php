@@ -9,6 +9,8 @@ use Psr\Container\ContainerInterface;
 
 final class RequestFixture
 {
+    // pass
+    private const PASSWORD_HASH = '$argon2i$v=19$m=16,t=4,p=1$TEEvQkF6dGRWZmRGbmFHNA$4ga3MX6bI5AnDNwfTUw3lTVmJlBggT9/fvjF4tOuxrM';
     private Connection $connection;
     public function __construct(ContainerInterface $container)
     {
@@ -17,6 +19,7 @@ final class RequestFixture
 
     public function load(): void
     {
+
         $this->connection->executeQuery('TRUNCATE authentication_users');
         $this->connection->createQueryBuilder()
             ->insert('authentication_users')
@@ -24,10 +27,12 @@ final class RequestFixture
                 [
                     'id' => ':id',
                     'email' => ':email',
+                    'password_hash' => ':password_hash',
                 ]
             )
             ->setParameter('id', '018d980e-c8f8-7015-ba0f-a3edff3243d5')
             ->setParameter('email', 'existing@lexusalex.tech')
+            ->setParameter('password_hash', self::PASSWORD_HASH)
             ->executeQuery();
     }
 }

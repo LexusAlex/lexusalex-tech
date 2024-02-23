@@ -8,12 +8,14 @@ use App\Authentication\Entity\User\Types\Email;
 use App\Authentication\Entity\User\Types\Id;
 use App\Authentication\Entity\User\User;
 use App\Authentication\Entity\User\UserRepository;
+use App\Authentication\Service\PasswordHasher;
 use DomainException;
 
 final class Handler
 {
     public function __construct(
         private readonly UserRepository $users,
+        private readonly PasswordHasher $hasher,
     ) {}
     public function handle(Command $command): void
     {
@@ -25,7 +27,8 @@ final class Handler
 
         $user = User::requestJoinByEmail(
             Id::generate(),
-            $email
+            $email,
+            $this->hasher->hash($command->password),
         );
 
         $this->users->add($user);

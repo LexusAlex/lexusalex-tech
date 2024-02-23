@@ -11,6 +11,7 @@ final class CreateTableAuthenticationUsers extends AbstractMigration
         $this->execute("CREATE TABLE authentication_users
            (id UUID NOT NULL,
             email VARCHAR(255) NOT NULL,
+            password_hash VARCHAR(255) DEFAULT NULL,
             PRIMARY KEY(id))");
     }
 
