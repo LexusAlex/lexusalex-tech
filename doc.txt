@@ -94,3 +94,5 @@ https://deworker.pro/edu/series/interactive-site/e2e-tests
 
 $this->logger->error($this->exception->getMessage(), ['exception' => $this->exception, 'url' => (string) $this->request->getUri(), 'ip' => isset($this->request->getServerParams()['REMOTE_ADDR']) ? $this->request->getServerParams()['REMOTE_ADDR'] : null]);
 $this->logger->error($this->exception->getMessage(), ['exception' => $this->exception, 'url' => $this->request->getUri(), 'ip' => isset($this->request->getServerParams()['REMOTE_ADDR']) ? $this->request->getServerParams()['REMOTE_ADDR'] : null]);
+
+Разобраться как в переменных окружения хранить пароли
