@@ -96,3 +96,6 @@ $this->logger->error($this->exception->getMessage(), ['exception' => $this->exce
 $this->logger->error($this->exception->getMessage(), ['exception' => $this->exception, 'url' => $this->request->getUri(), 'ip' => isset($this->request->getServerParams()['REMOTE_ADDR']) ? $this->request->getServerParams()['REMOTE_ADDR'] : null]);
 
 Разобраться как в переменных окружения хранить пароли
+
+$twig = $container->get(\Twig\Environment::class);
+echo $twig->render('authentication/joinByEmail/confirm.html.twig');
