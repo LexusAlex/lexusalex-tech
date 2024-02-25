@@ -1,5 +1,7 @@
 import "@/assets/css/styles.scss";
 import {Montserrat} from "next/font/google";
+import BootstrapClient from '@/components/BootstrapClient/BootstrapClient.jsx';
+import App from "@/components/App/App";
 
 const Font = Montserrat({ subsets: ['cyrillic-ext','latin','cyrillic'] })
 
@@ -11,7 +13,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={Font.className}>{children}</body>
+      <body className={Font.className}>
+        <App>{children}</App>
+        <BootstrapClient />
+      </body>
     </html>
   );
 }
