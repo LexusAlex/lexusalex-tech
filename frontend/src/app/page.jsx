@@ -1,6 +1,12 @@
-export default function Home() {
+import { options } from "./api/auth/[...nextauth]/options"
+import { getServerSession } from "next-auth/next"
+import Link from "next/link";
+
+export default async function Home() {
+  const session = await getServerSession(options)
   return (
       <main>
+        <Link href="/api/auth/signin">Sign In</Link>
         <div className="text-center mt-4 col-md-6 mx-auto">
           <h1 className="text-danger">Hello Bootstrap</h1>
 
