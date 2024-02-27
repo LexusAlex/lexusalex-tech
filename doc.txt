@@ -101,3 +101,7 @@ $twig = $container->get(\Twig\Environment::class);
 echo $twig->render('authentication/joinByEmail/confirm.html.twig');
 
 Запустить девелоперский проект на продакшене и запустить там тесты
+
+Внедрить
+https://nextauth-nextjs13.vercel.app/
+https://github.com/raiv200/NextAuth-Next.js-13
