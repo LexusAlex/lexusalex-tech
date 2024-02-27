@@ -1,14 +1,6 @@
-"use client"
-import {Button} from "react-bootstrap";
-import {signIn, signOut} from "next-auth/react";
-
 export default function Home() {
-  const SignIn = () => signIn();
-  const SignOut = signOut();
   return (
       <main>
-        <Button onClick={SignIn}>Войти</Button>
-        <Button onClick={SignOut}>Выйти</Button>
         <div className="text-center mt-4 col-md-6 mx-auto">
           <h1 className="text-danger">Hello Bootstrap</h1>
 
