@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next"
 import Link from "next/link";
 
 export default async function Home() {
-  const session = await getServerSession(options)
+
   return (
       <main>
         <Link href="/api/auth/signin">Sign In</Link>
