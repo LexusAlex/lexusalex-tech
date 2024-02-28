@@ -47,6 +47,8 @@ backend-psalm:
 	docker compose run --rm backend-php-cli composer psalm
 backend-infection:
 	docker compose run --rm backend-php-cli composer infection
+backend-infection-http:
+	docker compose run --rm backend-php-cli composer infection -- --filter=src/Http
 backend-load-fixtures:
 	docker compose run --rm backend-php-cli composer run app fixtures:load
 backend-clear-var:
