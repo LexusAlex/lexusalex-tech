@@ -113,6 +113,23 @@ final class RequestTest extends WebTestCase
         ], Json::decode($body));
     }
 
+    public function testIncorrectFormat(): void
+    {
+        $response = $this->application()->handle(self::json('POST', '/v1/authentication/join', [
+            'email' => true,
+            'password' => '123456',
+        ]));
+
+        self::assertEquals(422, $response->getStatusCode());
+        self::assertJson($body = (string) $response->getBody());
+
+        self::assertEquals([
+            'errors' => [
+                'email' => 'This value is not a valid email address.',
+            ],
+        ], Json::decode($body));
+    }
+
     public function testNotValid(): void
     {
         $response = $this->application()->handle(self::json('POST', '/v1/authentication/join', [
