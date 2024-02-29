@@ -116,8 +116,8 @@ final class RequestTest extends WebTestCase
     public function testIncorrectFormat(): void
     {
         $response = $this->application()->handle(self::json('POST', '/v1/authentication/join', [
-            'email' => true,
-            'password' => '123456',
+            'email' => [],
+            'password' => static function (): void {},
         ]));
 
         self::assertEquals(422, $response->getStatusCode());
@@ -125,7 +125,8 @@ final class RequestTest extends WebTestCase
 
         self::assertEquals([
             'errors' => [
-                'email' => 'This value is not a valid email address.',
+                'email' => 'The type must be one of "unknown" ("array" given).',
+                'password' => 'The type must be one of "unknown" ("array" given).',
             ],
         ], Json::decode($body));
     }
