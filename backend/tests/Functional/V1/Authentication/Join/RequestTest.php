@@ -135,7 +135,7 @@ final class RequestTest extends WebTestCase
     {
         $response = $this->application()->handle(self::json('POST', '/v1/authentication/join', [
             'email' => 'not-email',
-            'password' => 'new',
+            'password' => 'How',
         ]));
 
         self::assertEquals(422, $response->getStatusCode());
@@ -144,7 +144,7 @@ final class RequestTest extends WebTestCase
         self::assertEquals([
             'errors' => [
                 'email' => 'This value is not a valid email address.',
-                'password' => 'This value is too short. It should have 6 characters or more.',
+                'password' => 'The password strength is too low. Please use a stronger password.',
             ],
         ], Json::decode($body));
     }
