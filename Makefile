@@ -29,6 +29,8 @@ backend-phpunit-authentication:
 	docker compose run --rm backend-php-cli composer phpunit-authentication
 backend-phpunit-http:
 	docker compose run --rm backend-php-cli composer phpunit-http
+backend-phpunit-oauth:
+	docker compose run --rm backend-php-cli composer phpunit-oauth
 backend-phpunit-configurations:
 	docker compose run --rm backend-php-cli composer phpunit-configurations
 backend-phpunit-functional:
@@ -49,6 +51,8 @@ backend-infection:
 	docker compose run --rm backend-php-cli composer infection
 backend-infection-http:
 	docker compose run --rm backend-php-cli composer infection -- --filter=src/Http
+backend-infection-oauth:
+	docker compose run --rm backend-php-cli composer infection -- --filter=src/OAuth
 backend-load-fixtures:
 	docker compose run --rm backend-php-cli composer run app fixtures:load
 backend-clear-var:

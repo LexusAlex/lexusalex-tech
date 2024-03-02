@@ -6,11 +6,14 @@
         ],
         "excludes": [
             "Configurations/Test",
-            "Authentication/Test",
-            "Http/Test",
-            "Authentication/Fixture",
             "Configurations/Migrations",
             "Configurations/Cli",
+            "Authentication/Test",
+            "Authentication/Fixture",
+            "Http/Test",
+            "OAuth/Test"
+
+
         ]
     },
     "logs": {
