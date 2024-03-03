@@ -107,3 +107,9 @@ https://nextauth-nextjs13.vercel.app/
 https://github.com/raiv200/NextAuth-Next.js-13
 
 git add backend/ frontend/ .gitignore doc.txt docker-compose.yml Makefile README.md && git commit -m "fix doc" && git push origin && git push gitlab
+
+Создание ключей
+https://oauth2.thephpleague.com/installation/
+
+Внешние модули могут получать информацию только из запросов
+TODO переделать форму

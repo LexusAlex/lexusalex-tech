@@ -24,7 +24,7 @@ return [
         $debug = environment('APPLICATION_DEBUG', '0');
 
         $environment = new Environment($loader, [
-            'cache' => $debug ? false : __DIR__ . '/../../var/cache/twig',
+            'cache' => $debug ? false : __DIR__ . '/../../../../var/cache/twig',
             'debug' => $debug,
             'strict_variables' => $debug,
             'auto_reload' => $debug,

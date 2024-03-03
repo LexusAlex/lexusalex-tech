@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\OAuth\Test\Entity\RefreshToken;
 
-use App\OAuth\Entity\AccessToken\AccessToken;
 use App\OAuth\Entity\RefreshToken\RefreshToken;
+use App\OAuth\Test\Entity\AccessTokenBuilder;
+use App\OAuth\Test\Entity\ClientBuilder;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
@@ -16,12 +17,18 @@ final class RefreshTokenTest extends TestCase
     {
         $token = new RefreshToken();
 
+
+        $accessToken = (new AccessTokenBuilder())
+            ->withUserIdentifier($userIdentifier = Uuid::uuid7()->toString())
+            ->build((new ClientBuilder())->build());
+
         $token->setIdentifier($identifier = Uuid::uuid7()->toString());
         $token->setExpiryDateTime($expiryDateTime = new DateTimeImmutable());
-        $token->setAccessToken($accessToken = $this->createStub(AccessToken::class));
+        $token->setAccessToken($accessToken);
 
         self::assertSame($accessToken, $token->getAccessToken());
         self::assertSame($identifier, $token->getIdentifier());
+        self::assertSame($userIdentifier, $token->getUserIdentifier());
         self::assertSame($expiryDateTime, $token->getExpiryDateTime());
     }
 }
