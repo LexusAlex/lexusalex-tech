@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\OAuth\Test\Entity\RefreshToken;
 
 use App\OAuth\Entity\RefreshToken\RefreshToken;
-use App\OAuth\Test\Entity\AccessTokenBuilder;
-use App\OAuth\Test\Entity\ClientBuilder;
+use App\OAuth\Test\Entity\Builder\AccessTokenBuilder;
+use App\OAuth\Test\Entity\Builder\ClientBuilder;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;

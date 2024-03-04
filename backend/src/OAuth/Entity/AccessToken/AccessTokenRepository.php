@@ -16,9 +16,9 @@ final class AccessTokenRepository implements AccessTokenRepositoryInterface
         $userIdentifier = null
     ): AccessToken {
         $accessToken = new AccessToken($clientEntity, $scopes);
-
         if ($userIdentifier !== null) {
-            $accessToken->setUserIdentifier((string) $userIdentifier);
+            /** @var string $userIdentifier */
+            $accessToken->setUserIdentifier($userIdentifier);
         }
 
         return $accessToken;

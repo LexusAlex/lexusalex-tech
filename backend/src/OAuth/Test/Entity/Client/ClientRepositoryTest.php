@@ -18,7 +18,6 @@ final class ClientRepositoryTest extends TestCase
         $repository = new ClientRepository([$client]);
 
         self::assertNull($repository->getClientEntity('456456456'));
-
         self::assertTrue($repository->validateClient($id, null, 'common'));
 
 

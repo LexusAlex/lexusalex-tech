@@ -6,7 +6,7 @@ namespace App\OAuth\Test\Entity\AuthCode;
 
 use App\OAuth\Entity\AuthCode\AuthCode;
 use App\OAuth\Entity\Scope\Scope;
-use App\OAuth\Test\Entity\ClientBuilder;
+use App\OAuth\Test\Entity\Builder\ClientBuilder;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;

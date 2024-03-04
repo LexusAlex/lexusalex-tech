@@ -6,7 +6,8 @@ namespace App\OAuth\Test\Entity\AccessToken;
 
 use App\OAuth\Entity\AccessToken\AccessToken;
 use App\OAuth\Entity\Scope\Scope;
-use App\OAuth\Test\Entity\ClientBuilder;
+use App\OAuth\Test\Entity\Builder\ClientBuilder;
+use App\OAuth\Test\Entity\Builder\ScopeBuilder;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
@@ -17,7 +18,8 @@ final class AccessTokenTest extends TestCase
     {
         $token = new AccessToken(
             $client = (new ClientBuilder())->build(),
-            $scopes = [new Scope('common')]
+            /** @var array<array-key, Scope> $scopes */
+            $scopes = (new ScopeBuilder())->build()
         );
 
         $token->setIdentifier($identifier = Uuid::uuid7()->toString());
