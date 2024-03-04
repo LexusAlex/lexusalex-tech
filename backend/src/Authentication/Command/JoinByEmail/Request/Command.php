@@ -12,8 +12,8 @@ final class Command
         #[Assert\NotBlank]
         #[Assert\Email]
         public string $email = '',
-        #[Assert\Length(min: 6)]
         #[Assert\PasswordStrength(minScore: Assert\PasswordStrength::STRENGTH_WEAK)]
+        #[Assert\Length(min: 6)]
         #[Assert\NotBlank]
         public string $password = ''
     ) {}
