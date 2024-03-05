@@ -11,7 +11,7 @@ use Test\Functional\WebTestCase;
 
 final class AuthCodeRepositoryTest extends WebTestCase
 {
-    public function testSuccess()
+    public function testSuccess(): void
     {
         $code = new AuthCodeBuilder();
 

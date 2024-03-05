@@ -11,17 +11,17 @@ use Ramsey\Uuid\Uuid;
 
 final class AuthCodeBuilder
 {
-  public function build()
-  {
-      $code = new AuthCode();
+    public function build()
+    {
+        $code = new AuthCode();
 
-      $code->setClient((new ClientBuilder())->build());
-      $code->addScope(new Scope('common'));
-      $code->setIdentifier(Uuid::uuid7()->toString());
-      $code->setUserIdentifier(Uuid::uuid7()->toString());
-      $code->setExpiryDateTime(new DateTimeImmutable());
-      $code->setRedirectUri('http://localhost/auth');
+        $code->setClient((new ClientBuilder())->build());
+        $code->addScope(new Scope('common'));
+        $code->setIdentifier(Uuid::uuid7()->toString());
+        $code->setUserIdentifier(Uuid::uuid7()->toString());
+        $code->setExpiryDateTime(new DateTimeImmutable());
+        $code->setRedirectUri('http://localhost/auth');
 
-      return $code;
-  }
+        return $code;
+    }
 }
