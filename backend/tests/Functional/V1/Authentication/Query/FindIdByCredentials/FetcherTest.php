@@ -65,6 +65,7 @@ final class FetcherTest extends WebTestCase
 
         /** @var ContainerInterface $container */
         $container = $this->application()->getContainer();
+        $container->get(FetcherFixtureTruncate::class)->load();
         $container->get(FetcherNullPasswordFixture::class)->load();
 
         $fetcher = $container->get(Fetcher::class);
