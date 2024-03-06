@@ -17,9 +17,7 @@ final class ConstructorFixtures
 
     public function insertSingleData(string $table, array $tableData, bool $clearBefore = true): void
     {
-        /**
-         * @var array $values
-         */
+
         $values = [];
 
         foreach (array_keys($tableData) as $data) {
@@ -30,6 +28,9 @@ final class ConstructorFixtures
             $this->connection->executeQuery('TRUNCATE ' . $table);
         }
 
+        /**
+         * @var array<string, mixed> $values
+         */
         $this->connection->createQueryBuilder()
             ->insert($table)
             ->values($values)
