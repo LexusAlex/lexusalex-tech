@@ -15,7 +15,7 @@ final class ConstructorFixtures
         $this->connection = $container->get(Connection::class);
     }
 
-    public function insertSingleData(string $table, array $tableData): void
+    public function insertSingleData(string $table, array $tableData, bool $clearBefore = true): void
     {
         /**
          * @var array $values
@@ -24,6 +24,10 @@ final class ConstructorFixtures
 
         foreach (array_keys($tableData) as $data) {
             $values[$data] = ":$data";
+        }
+
+        if ($clearBefore) {
+            $this->connection->executeQuery('TRUNCATE ' . $table);
         }
 
         $this->connection->createQueryBuilder()

@@ -34,7 +34,8 @@ final class AuthorizeFixture
                 'id' => '018d980e-c8f8-7015-ba0f-a3edff3243d6',
                 'email' => 'wait@app.test',
                 'password_hash' => self::PASSWORD_HASH,
-            ]
+            ],
+            false
         );
     }
 }
