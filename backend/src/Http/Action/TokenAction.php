@@ -27,12 +27,12 @@ final class TokenAction implements RequestHandlerInterface
         try {
             return $this->server->respondToAccessTokenRequest($request, $response);
         } catch (OAuthServerException $exception) {
-            $this->logger->warning($exception->getMessage(), ['exception' => $exception]);
+            $this->logger->warning($exception->getMessage(), [
+                'exception' => $exception,
+                'url' => $request->getUri()->getPath(),
+                'ip' => (isset($request->getServerParams()['REMOTE_ADDR'])) ? $request->getServerParams()['REMOTE_ADDR'] : null,
+            ]);
             return $exception->generateHttpResponse($response);
-        } catch (Exception $exception) {
-            $this->logger->error($exception->getMessage(), ['exception' => $exception]);
-            return (new OAuthServerException($exception->getMessage(), 0, 'unknown_error', 500))
-                ->generateHttpResponse($response);
         }
     }
 }

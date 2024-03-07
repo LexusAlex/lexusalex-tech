@@ -184,4 +184,25 @@ final class AuthorizeTest extends WebTestCase
         self::assertNotEmpty($content = (string) $response->getBody());
         self::assertStringContainsString('Incorrect email or password.', $content);
     }
+
+    public function testUnknownError(): void
+    {
+        $response = $this->application()->handle(self::html(
+            'POST',
+            '/authorize?' . http_build_query([
+                'response_type' => 'code',
+                'client_id' => 'frontend',
+                'redirect_uri' => 'http://127.0.0.1/oauth',
+                'code_challenge' => PKCE::challenge(PKCE::verifier()),
+                'code_challenge_method' => 'S256',
+                'scope' => 'common',
+                'state' => 'sTaTe',
+            ]),
+            [
+                'email2' => 'active@app.test',
+            ]
+        ));
+
+        self::assertEquals(500, $response->getStatusCode());
+    }
 }

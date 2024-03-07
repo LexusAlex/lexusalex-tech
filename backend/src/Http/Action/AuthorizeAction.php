@@ -48,6 +48,7 @@ final class AuthorizeAction implements RequestHandlerInterface
                     );
                 }
 
+                /*
                 if (!$user->isActive) {
                     $error = 'User is not confirmed.';
                     return new HtmlResponse(
@@ -55,6 +56,7 @@ final class AuthorizeAction implements RequestHandlerInterface
                         409
                     );
                 }
+                */
 
                 $authRequest->setUser(new User($user->id));
                 $authRequest->setAuthorizationApproved(true);
@@ -66,10 +68,18 @@ final class AuthorizeAction implements RequestHandlerInterface
                 $this->template->render('oauth/authorize.html.twig')
             );
         } catch (OAuthServerException $exception) {
-            $this->logger->warning($exception->getMessage(), ['exception' => $exception]);
+            $this->logger->warning($exception->getMessage(), [
+                'exception' => $exception,
+                'url' => $request->getUri()->getPath(),
+                'ip' => (isset($request->getServerParams()['REMOTE_ADDR'])) ? $request->getServerParams()['REMOTE_ADDR'] : null,
+            ]);
             return $exception->generateHttpResponse($this->response->createResponse());
         } catch (Exception $exception) {
-            $this->logger->error($exception->getMessage(), ['exception' => $exception]);
+            $this->logger->error($exception->getMessage(), [
+                'exception' => $exception,
+                'url' => $request->getUri()->getPath(),
+                'ip' => (isset($request->getServerParams()['REMOTE_ADDR'])) ? $request->getServerParams()['REMOTE_ADDR'] : null,
+            ]);
             return (new OAuthServerException('Server error.', 0, 'unknown_error', 500))
                 ->generateHttpResponse($this->response->createResponse());
         }

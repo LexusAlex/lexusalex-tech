@@ -7,7 +7,6 @@ namespace App\Authentication\Query\FindIdByCredentials;
 final class User
 {
     public function __construct(
-        public readonly string $id,
-        public readonly bool $isActive,
+        public readonly string $id
     ) {}
 }

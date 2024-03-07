@@ -50,8 +50,7 @@ final class Fetcher
         }
 
         return new User(
-            id: $row['id'],
-            isActive: true
+            id: $row['id']
         );
     }
 }

@@ -27,11 +27,24 @@ final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
         if ($this->exists($refreshTokenEntity->getIdentifier())) {
             throw UniqueTokenIdentifierConstraintViolationException::create();
         }
+
+        $this->connection->createQueryBuilder()
+            ->insert('oauth_refresh_tokens')
+            ->values(
+                [
+                    'identifier' => ':identifier',
+                    'expiry_date_time' => ':expiry_date_time',
+                    'user_identifier' => ':user_identifier',
+                ]
+            )
+            ->setParameter('identifier', $refreshTokenEntity->getIdentifier())
+            ->setParameter('expiry_date_time', $refreshTokenEntity->getExpiryDateTime()->format(DATE_ATOM))
+            ->setParameter('user_identifier', $refreshTokenEntity->getUserIdentifier())
+            ->executeQuery();
     }
 
     public function revokeRefreshToken($tokenId): void
     {
-
         $result = $this->connection->createQueryBuilder()
                 ->select('*')
                 ->from('oauth_refresh_tokens')
