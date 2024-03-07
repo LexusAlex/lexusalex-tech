@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Test\Functional\OAuth\Fixtures;
 
-use App\OAuth\Entity\Client\Client;
-use App\OAuth\Entity\RefreshToken\RefreshToken;
-use App\OAuth\Test\Entity\Builder\AccessTokenBuilder;
-use DateTimeImmutable;
 use Psr\Container\ContainerInterface;
 use Test\Functional\Service\ConstructorFixtures;
 
@@ -32,23 +28,6 @@ final class RefreshTokenFixture
                 'password_hash' => self::PASSWORD_HASH,
             ]
         );
-
-
-        $client = new Client(
-            identifier: 'frontend',
-            name: 'Frontend',
-            redirectUri: 'http://localhost/oauth',
-        );
-
-        $accessToken = (new AccessTokenBuilder())
-            ->withUserIdentifier('00000000-0000-0000-0000-000000000001')
-            ->build($client);
-
-        $refreshToken = new RefreshToken();
-        $refreshToken->setAccessToken($accessToken);
-        $refreshToken->setExpiryDateTime(new DateTimeImmutable('2300-12-31 21:00:10'));
-        $refreshToken->setIdentifier('aef50200f204dedbb244ce4539b9e');
-
 
         $this->constructorFixtures->insertSingleData(
             'oauth_refresh_tokens',

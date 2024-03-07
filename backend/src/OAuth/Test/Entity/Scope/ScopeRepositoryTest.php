@@ -19,6 +19,8 @@ final class ScopeRepositoryTest extends TestCase
         $repository = new ScopeRepository($scope);
         $client = (new ClientBuilder())->build();
         $scopes = $repository->finalizeScopes([], 'common', $client);
+        $scopeNull = $repository->getScopeEntityByIdentifier('common1');
         self::assertCount(0, $scopes);
+        self::assertNull($scopeNull);
     }
 }

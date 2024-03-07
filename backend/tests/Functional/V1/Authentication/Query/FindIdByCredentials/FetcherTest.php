@@ -69,6 +69,7 @@ final class FetcherTest extends WebTestCase
         $container->get(FetcherNullPasswordFixture::class)->load();
 
         $fetcher = $container->get(Fetcher::class);
+
         self::assertNull($fetcher->fetch($query));
     }
 

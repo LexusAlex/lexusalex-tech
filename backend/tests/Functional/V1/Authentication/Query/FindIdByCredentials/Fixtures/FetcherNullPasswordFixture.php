@@ -23,7 +23,7 @@ final class FetcherNullPasswordFixture
             [
                 'id' => '018d980e-c8f8-7015-ba0f-a3edff3243d5',
                 'email' => 'tech@lexusalex.tech',
-                'password_hash' => '',
+                'password_hash' => null,
             ]
         );
     }
