@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Action;
 
-use Exception;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Psr\Http\Message\ResponseFactoryInterface;

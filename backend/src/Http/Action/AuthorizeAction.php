@@ -9,7 +9,6 @@ use App\Authentication\Query\FindIdByCredentials\Query;
 use App\Configurations\Serializer\Denormalizer;
 use App\Http\Response\HtmlResponse;
 use App\OAuth\Entity\User\User;
-use Exception;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -74,14 +73,6 @@ final class AuthorizeAction implements RequestHandlerInterface
                 'ip' => (isset($request->getServerParams()['REMOTE_ADDR'])) ? $request->getServerParams()['REMOTE_ADDR'] : null,
             ]);
             return $exception->generateHttpResponse($this->response->createResponse());
-        } catch (Exception $exception) {
-            $this->logger->error($exception->getMessage(), [
-                'exception' => $exception,
-                'url' => $request->getUri()->getPath(),
-                'ip' => (isset($request->getServerParams()['REMOTE_ADDR'])) ? $request->getServerParams()['REMOTE_ADDR'] : null,
-            ]);
-            return (new OAuthServerException('Server error.', 0, 'unknown_error', 500))
-                ->generateHttpResponse($this->response->createResponse());
         }
     }
 }

@@ -185,7 +185,7 @@ final class AuthorizeTest extends WebTestCase
         self::assertStringContainsString('Incorrect email or password.', $content);
     }
 
-    public function testUnknownError(): void
+    public function testAttributeNotAllowed(): void
     {
         $response = $this->application()->handle(self::html(
             'POST',
@@ -203,6 +203,16 @@ final class AuthorizeTest extends WebTestCase
             ]
         ));
 
-        self::assertEquals(500, $response->getStatusCode());
+        self::assertEquals(422, $response->getStatusCode());
+        self::assertNotEmpty($content = (string) $response->getBody());
+        $data = Json::decode($content);
+
+        self::assertEquals([
+            'email2' => 'The attribute is not allowed.',
+        ], $data['errors']);
+
+
+
+
     }
 }
