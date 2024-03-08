@@ -20,6 +20,7 @@ use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
 use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
 use League\OAuth2\Server\Repositories\UserRepositoryInterface;
+use League\OAuth2\Server\ResourceServer;
 use Psr\Container\ContainerInterface;
 
 use function App\Configurations\Main\environment;
@@ -54,6 +55,12 @@ return [
         $server->enableGrantType($grant, new DateInterval('PT10M'));
 
         return $server;
+    },
+    ResourceServer::class => static function (ContainerInterface $container): ResourceServer {
+        return new ResourceServer(
+            $container->get(AccessTokenRepositoryInterface::class),
+            new CryptKey(environment('JWT_PUBLIC_KEY_PATH'), null, false)
+        );
     },
     ScopeRepositoryInterface::class => static function (): ScopeRepository {
 
