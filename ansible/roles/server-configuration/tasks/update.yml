@@ -1,0 +1,8 @@
+---
+
+- name: update packages
+  ansible.builtin.apt:
+    update_cache: yes
+  debugger: on_failed
+  tags:
+    - update-packages

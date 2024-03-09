@@ -1,0 +1,16 @@
+all:
+  children:
+    group1:
+      hosts:
+        host1:
+          ansible_host: 127.0.0.1
+          ansible_port: 2
+          ansible_user: root
+    group2:
+      hosts:
+        host2:
+          ansible_host: 127.0.0.2
+          accounts:
+            - { user: admin, state: present }
+      vars:
+        foo: bar

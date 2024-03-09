@@ -1,0 +1,8 @@
+---
+
+- name: upgrade packages
+  ansible.builtin.apt:
+    upgrade: dist
+  debugger: on_failed
+  tags:
+    - upgrade-packages

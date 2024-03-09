@@ -1,0 +1,4 @@
+---
+argument_specs:
+  main:
+    short_description: Configuration server for install system (update,upgrade,ufw,fail2ban,user)

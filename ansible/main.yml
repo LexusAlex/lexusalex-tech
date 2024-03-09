@@ -1,0 +1,6 @@
+---
+- name: main
+  hosts: all
+  roles:
+    - role: server-configuration
+      tags: server-configuration

@@ -113,3 +113,14 @@ https://oauth2.thephpleague.com/installation/
 
 Внешние модули могут получать информацию только из запросов
 TODO переделать форму
+
+ansible debug
+---
+- name: update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+  register: apt_output
+  debugger: on_failed
+- name: Display apt output
+  debug:
+   var: apt_output
