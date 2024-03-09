@@ -6,6 +6,7 @@ namespace App\Http\Action;
 
 use App\Authentication\Query\FindIdByCredentials\Fetcher;
 use App\Authentication\Query\FindIdByCredentials\Query;
+use App\Configurations\Error\ErrorMessage;
 use App\Configurations\Serializer\Denormalizer;
 use App\Http\Response\HtmlResponse;
 use App\OAuth\Entity\User\User;
@@ -18,15 +19,15 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use Twig\Environment;
 
-final class AuthorizeAction implements RequestHandlerInterface
+final readonly class AuthorizeAction implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly AuthorizationServer $server,
-        private readonly LoggerInterface $logger,
-        private readonly Fetcher $users,
-        private readonly Environment $template,
-        private readonly ResponseFactoryInterface $response,
-        private readonly Denormalizer $denormalizer,
+        private AuthorizationServer      $server,
+        private LoggerInterface          $logger,
+        private Fetcher                  $users,
+        private Environment              $template,
+        private ResponseFactoryInterface $response,
+        private Denormalizer             $denormalizer,
     ) {}
 
     public function handle(ServerRequestInterface $request): ResponseInterface
@@ -67,11 +68,7 @@ final class AuthorizeAction implements RequestHandlerInterface
                 $this->template->render('oauth/authorize.html.twig')
             );
         } catch (OAuthServerException $exception) {
-            $this->logger->warning($exception->getMessage(), [
-                'exception' => $exception,
-                'url' => $request->getUri()->getPath(),
-                'ip' => (isset($request->getServerParams()['REMOTE_ADDR'])) ? $request->getServerParams()['REMOTE_ADDR'] : null,
-            ]);
+            ErrorMessage::createErrorLogMessage($this->logger, $exception, $request);
             return $exception->generateHttpResponse($this->response->createResponse());
         }
     }

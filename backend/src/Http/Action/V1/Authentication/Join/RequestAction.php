@@ -13,12 +13,12 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-final class RequestAction implements RequestHandlerInterface
+final readonly class RequestAction implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly Handler $handler,
-        private readonly Validator $validator,
-        private readonly Denormalizer $denormalizer,
+        private Handler      $handler,
+        private Validator    $validator,
+        private Denormalizer $denormalizer,
     ) {}
 
     public function handle(ServerRequestInterface $request): ResponseInterface

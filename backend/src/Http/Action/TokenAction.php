@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Action;
 
+use App\Configurations\Error\ErrorMessage;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -12,11 +13,11 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 
-final class TokenAction implements RequestHandlerInterface
+final readonly class TokenAction implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly AuthorizationServer $server,
-        private LoggerInterface $logger,
+        private AuthorizationServer      $server,
+        private LoggerInterface          $logger,
         private ResponseFactoryInterface $response,
     ) {}
 
@@ -26,11 +27,7 @@ final class TokenAction implements RequestHandlerInterface
         try {
             return $this->server->respondToAccessTokenRequest($request, $response);
         } catch (OAuthServerException $exception) {
-            $this->logger->warning($exception->getMessage(), [
-                'exception' => $exception,
-                'url' => $request->getUri()->getPath(),
-                'ip' => (isset($request->getServerParams()['REMOTE_ADDR'])) ? $request->getServerParams()['REMOTE_ADDR'] : null,
-            ]);
+            ErrorMessage::createErrorLogMessage($this->logger, $exception, $request);
             return $exception->generateHttpResponse($response);
         }
     }
