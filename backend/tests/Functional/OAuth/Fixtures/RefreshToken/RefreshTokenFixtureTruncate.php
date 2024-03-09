@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Test\Functional\OAuth\Fixtures;
+namespace Test\Functional\OAuth\Fixtures\RefreshToken;
 
 use Doctrine\DBAL\Connection;
 use Psr\Container\ContainerInterface;

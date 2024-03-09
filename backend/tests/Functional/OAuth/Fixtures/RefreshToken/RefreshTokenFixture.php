@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Test\Functional\OAuth\Fixtures;
+namespace Test\Functional\OAuth\Fixtures\RefreshToken;
 
 use Psr\Container\ContainerInterface;
 use Test\Functional\Service\ConstructorFixtures;
 
-final class AuthorizeFixture
+final class RefreshTokenFixture
 {
     // pass
     private const PASSWORD_HASH = '$argon2i$v=19$m=16,t=4,p=1$TEEvQkF6dGRWZmRGbmFHNA$4ga3MX6bI5AnDNwfTUw3lTVmJlBggT9/fvjF4tOuxrM';
@@ -19,23 +19,23 @@ final class AuthorizeFixture
 
     public function load(): void
     {
+
         $this->constructorFixtures->insertSingleData(
             'authentication_users',
             [
-                'id' => '018d980e-c8f8-7015-ba0f-a3edff3243d5',
+                'id' => '00000000-0000-0000-0000-000000000001',
                 'email' => 'active@app.test',
                 'password_hash' => self::PASSWORD_HASH,
             ]
         );
 
         $this->constructorFixtures->insertSingleData(
-            'authentication_users',
+            'oauth_refresh_tokens',
             [
-                'id' => '018d980e-c8f8-7015-ba0f-a3edff3243d6',
-                'email' => 'wait@app.test',
-                'password_hash' => self::PASSWORD_HASH,
-            ],
-            false
+                'identifier' => 'aef50200f204dedbb244ce4539b9e',
+                'expiry_date_time' => '2300-12-31 21:00:10',
+                'user_identifier' => '00000000-0000-0000-0000-000000000001',
+            ]
         );
     }
 }

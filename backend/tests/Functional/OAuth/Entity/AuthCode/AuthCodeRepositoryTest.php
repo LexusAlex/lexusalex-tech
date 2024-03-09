@@ -8,7 +8,7 @@ use App\OAuth\Entity\AuthCode\AuthCodeRepository;
 use App\OAuth\Test\Entity\Builder\AuthCodeBuilder;
 use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException;
 use Psr\Container\ContainerInterface;
-use Test\Functional\OAuth\Fixtures\AuthCodeRepositoryFixtureTruncate;
+use Test\Functional\OAuth\Fixtures\AuthCode\AuthCodeRepositoryFixtureTruncate;
 use Test\Functional\WebTestCase;
 
 final class AuthCodeRepositoryTest extends WebTestCase

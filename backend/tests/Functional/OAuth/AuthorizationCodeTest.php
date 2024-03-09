@@ -8,8 +8,8 @@ use DateTimeImmutable;
 use Defuse\Crypto\Crypto;
 use Psr\Container\ContainerInterface;
 use Test\Functional\Json;
-use Test\Functional\OAuth\Fixtures\AuthorizationCodeFixture;
-use Test\Functional\OAuth\Fixtures\AuthorizationCodeFixtureTruncate;
+use Test\Functional\OAuth\Fixtures\AuthorizationCode\AuthorizationCodeFixture;
+use Test\Functional\OAuth\Fixtures\AuthorizationCode\AuthorizationCodeFixtureTruncate;
 use Test\Functional\OAuth\Service\PKCE;
 use Test\Functional\WebTestCase;
 

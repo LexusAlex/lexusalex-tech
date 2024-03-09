@@ -6,8 +6,8 @@ namespace Test\Functional\OAuth;
 
 use Psr\Container\ContainerInterface;
 use Test\Functional\Json;
-use Test\Functional\OAuth\Fixtures\AuthorizeFixture;
-use Test\Functional\OAuth\Fixtures\AuthorizeFixtureTruncate;
+use Test\Functional\OAuth\Fixtures\AuthorizationCode\AuthorizeFixture;
+use Test\Functional\OAuth\Fixtures\AuthorizationCode\AuthorizeFixtureTruncate;
 use Test\Functional\OAuth\Service\PKCE;
 use Test\Functional\WebTestCase;
 

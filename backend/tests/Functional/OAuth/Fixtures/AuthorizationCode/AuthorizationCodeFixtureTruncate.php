@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Test\Functional\OAuth\Fixtures;
+namespace Test\Functional\OAuth\Fixtures\AuthorizationCode;
 
 use Doctrine\DBAL\Connection;
 use Psr\Container\ContainerInterface;
 
-final class AuthCodeRepositoryFixtureTruncate
+final class AuthorizationCodeFixtureTruncate
 {
     private Connection $connection;
     public function __construct(ContainerInterface $container)
@@ -17,6 +17,7 @@ final class AuthCodeRepositoryFixtureTruncate
 
     public function load(): void
     {
+        $this->connection->executeQuery('TRUNCATE authentication_users');
         $this->connection->executeQuery('TRUNCATE oauth_auth_codes');
     }
 }

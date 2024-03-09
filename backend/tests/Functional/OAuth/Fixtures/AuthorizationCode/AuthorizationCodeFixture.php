@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Test\Functional\OAuth\Fixtures;
+namespace Test\Functional\OAuth\Fixtures\AuthorizationCode;
 
 use Psr\Container\ContainerInterface;
 use Test\Functional\Service\ConstructorFixtures;

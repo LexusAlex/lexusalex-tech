@@ -9,8 +9,8 @@ use DateTimeImmutable;
 use Defuse\Crypto\Crypto;
 use Psr\Container\ContainerInterface;
 use Test\Functional\Json;
-use Test\Functional\OAuth\Fixtures\RefreshTokenFixture;
-use Test\Functional\OAuth\Fixtures\RefreshTokenFixtureTruncate;
+use Test\Functional\OAuth\Fixtures\RefreshToken\RefreshTokenFixture;
+use Test\Functional\OAuth\Fixtures\RefreshToken\RefreshTokenFixtureTruncate;
 use Test\Functional\WebTestCase;
 
 use function App\Configurations\Main\environment;
