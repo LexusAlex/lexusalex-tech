@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware\Authenticate;
 
+use App\Configurations\Error\ErrorMessage;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\ResourceServer;
 use LogicException;
@@ -12,18 +13,17 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Log\LoggerInterface;
 
 final class Authenticate implements MiddlewareInterface
 {
-    private const ATTRIBUTE = 'identity';
-    private ResourceServer $server;
-    private ResponseFactoryInterface $response;
+    private const string ATTRIBUTE = 'identity';
 
-    public function __construct(ResourceServer $server, ResponseFactoryInterface $response)
-    {
-        $this->server = $server;
-        $this->response = $response;
-    }
+    public function __construct(
+        private readonly ResourceServer $server,
+        private readonly ResponseFactoryInterface $response,
+        private readonly LoggerInterface $logger
+    ) {}
 
     public static function identity(ServerRequestInterface $request): ?Identity
     {
@@ -45,11 +45,12 @@ final class Authenticate implements MiddlewareInterface
         try {
             $request = $this->server->validateAuthenticatedRequest($request);
         } catch (OAuthServerException $exception) {
+            ErrorMessage::createErrorLogMessage($this->logger, $exception, $request);
             return $exception->generateHttpResponse($this->response->createResponse());
         }
 
         $identity = new Identity(
-            id: (string) $request->getAttribute('oauth_user_id'),
+            id: $request->getAttribute('oauth_user_id'),
         );
 
         return $handler->handle($request->withAttribute(self::ATTRIBUTE, $identity));

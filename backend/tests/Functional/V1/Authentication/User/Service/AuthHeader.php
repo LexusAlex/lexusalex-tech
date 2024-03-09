@@ -20,7 +20,7 @@ final class AuthHeader
         $token = new AccessToken(
             new Client(
                 identifier: 'frontend',
-                name: 'Auction',
+                name: 'tech',
                 redirectUri: 'http://localhost:8080/oauth'
             ),
             [new Scope('common')],

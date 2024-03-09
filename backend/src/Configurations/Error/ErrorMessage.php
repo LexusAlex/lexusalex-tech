@@ -21,4 +21,16 @@ final class ErrorMessage
             'ip' => (isset($request->getServerParams()['REMOTE_ADDR'])) ? $request->getServerParams()['REMOTE_ADDR'] : null,
         ]);
     }
+
+    public static function createWarningLogMessage(
+        LoggerInterface $logger,
+        Throwable $exception,
+        ServerRequestInterface $request
+    ): void {
+        $logger->warning($exception->getMessage(), [
+            'exception' => $exception,
+            'url' => $request->getUri()->getPath(),
+            'ip' => (isset($request->getServerParams()['REMOTE_ADDR'])) ? $request->getServerParams()['REMOTE_ADDR'] : null,
+        ]);
+    }
 }

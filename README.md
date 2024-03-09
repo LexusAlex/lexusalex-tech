@@ -8,3 +8,5 @@
 
 1. Создать в каталоге `ansible/inventory` фаил по типу `ansible/inventory.example`
 2. Запустить `make ansible-main`
+
+## Аутентификация
