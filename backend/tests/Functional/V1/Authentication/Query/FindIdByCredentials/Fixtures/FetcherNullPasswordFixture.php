@@ -6,25 +6,27 @@ namespace Test\Functional\V1\Authentication\Query\FindIdByCredentials\Fixtures;
 
 use Psr\Container\ContainerInterface;
 use Test\Functional\Service\ConstructorFixtures;
+use Test\Functional\Service\DataFixtures;
 
 final class FetcherNullPasswordFixture
 {
     private ConstructorFixtures $constructorFixtures;
+    private DataFixtures $dataFixtures;
     public function __construct(ContainerInterface $container)
     {
         $this->constructorFixtures = $container->get(ConstructorFixtures::class);
+        $this->dataFixtures = $container->get(DataFixtures::class);
 
     }
 
     public function load(): void
     {
+        /** @var array{table:string, data:string[]} $userNullPass */
+        $userNullPass = $this->dataFixtures->getUserNullPasswordData();
+
         $this->constructorFixtures->insertSingleData(
-            'authentication_users',
-            [
-                'id' => '018d980e-c8f8-7015-ba0f-a3edff3243d5',
-                'email' => 'tech@lexusalex.tech',
-                'password_hash' => null,
-            ]
+            $userNullPass['table'],
+            $userNullPass['data']
         );
     }
 }

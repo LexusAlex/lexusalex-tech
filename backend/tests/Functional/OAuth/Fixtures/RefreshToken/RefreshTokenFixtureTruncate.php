@@ -6,18 +6,22 @@ namespace Test\Functional\OAuth\Fixtures\RefreshToken;
 
 use Doctrine\DBAL\Connection;
 use Psr\Container\ContainerInterface;
+use Test\Functional\Service\DataFixtures;
 
 final class RefreshTokenFixtureTruncate
 {
     private Connection $connection;
+
+    private DataFixtures $dataFixtures;
     public function __construct(ContainerInterface $container)
     {
         $this->connection = $container->get(Connection::class);
+        $this->dataFixtures = $container->get(DataFixtures::class);
     }
 
     public function load(): void
     {
-        $this->connection->executeQuery('TRUNCATE authentication_users');
-        $this->connection->executeQuery('TRUNCATE oauth_refresh_tokens');
+        $this->connection->executeQuery($this->dataFixtures->truncateUser());
+        $this->connection->executeQuery($this->dataFixtures->truncateRefreshTokens());
     }
 }
