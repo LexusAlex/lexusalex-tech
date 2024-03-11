@@ -12,7 +12,6 @@ use League\OAuth2\Server\Entities\Traits\RefreshTokenTrait;
 
 /**
  * @psalm-suppress MissingConstructor
- * @psalm-suppress PossiblyUnusedProperty
  */
 final class RefreshToken implements RefreshTokenEntityInterface
 {

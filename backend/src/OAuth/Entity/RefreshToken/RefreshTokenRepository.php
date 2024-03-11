@@ -9,6 +9,9 @@ use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
 use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException;
 use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 
+/**
+ * @psalm-suppress UndefinedInterfaceMethod
+ */
 final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
 {
     private Connection $connection;
