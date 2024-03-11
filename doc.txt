@@ -124,3 +124,6 @@ ansible debug
 - name: Display apt output
   debug:
    var: apt_output
+
+phpunit
+docker compose run --rm backend-php-cli composer phpunit -- --filter testSetHeaderSuccess src/Http/Test/Middleware/Authenticate/AuthenticateTest.php
