@@ -127,3 +127,5 @@ ansible debug
 
 phpunit
 docker compose run --rm backend-php-cli composer phpunit -- --filter testSetHeaderSuccess src/Http/Test/Middleware/Authenticate/AuthenticateTest.php
+
+https://lucia-auth.com/guides/oauth/custom-providers

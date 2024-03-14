@@ -1,11 +1,5 @@
-import { lucia, validateRequest } from "@/lib/auth";
-import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const { user } = await validateRequest();
-  if (!user) {
-    return redirect("/login");
-  }
   return (
       <main>
         <div className="text-center mt-4 col-md-6 mx-auto">
