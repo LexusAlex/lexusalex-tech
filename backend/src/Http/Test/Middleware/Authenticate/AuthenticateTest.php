@@ -73,7 +73,6 @@ final class AuthenticateTest extends TestCase
 
     public function testNotValidRequest(): void
     {
-        $logger = $this->createMock(LoggerInterface::class);
 
         $dependencies = (require __DIR__ . '/../../../../Configurations/Main/dependencies.php')((__DIR__ . '/../../../../../src'));
 
@@ -82,6 +81,8 @@ final class AuthenticateTest extends TestCase
         $server = $container->get(ResourceServer::class);
 
         $response = $container->get(ResponseFactoryInterface::class);
+
+        $logger = $container->get(LoggerInterface::class);
 
         $middleware = new Authenticate($server, $response, $logger);
 
