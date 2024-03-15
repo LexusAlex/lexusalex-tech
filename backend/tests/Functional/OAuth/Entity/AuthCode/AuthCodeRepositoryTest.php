@@ -28,4 +28,13 @@ final class AuthCodeRepositoryTest extends WebTestCase
         $repository->persistNewAuthCode($code->build());
 
     }
+
+    public function testRevokeAuthCode()
+    {
+        /** @var ContainerInterface $container */
+        $container = $this->application()->getContainer();
+        $repository = $container->get(AuthCodeRepository::class);
+        $rep = $repository->revokeAuthCode('018e13f4-7cdb-71a8-be03-ce8496c869c5');
+
+    }
 }

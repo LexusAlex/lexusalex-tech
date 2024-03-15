@@ -24,7 +24,7 @@ final class Fetcher
             ->select('id', 'password_hash')
             ->from('authentication_users')
             ->where('email = :email')
-            ->setParameter('email', mb_strtolower($query->email))
+            ->setParameter('email', strtolower($query->email))
             ->executeQuery();
 
         /**
