@@ -29,7 +29,7 @@ final class AuthCodeRepositoryTest extends WebTestCase
 
     }
 
-    public function testRevokeAuthCode()
+    public function testRevokeAuthCode(): void
     {
         /** @var ContainerInterface $container */
         $container = $this->application()->getContainer();
