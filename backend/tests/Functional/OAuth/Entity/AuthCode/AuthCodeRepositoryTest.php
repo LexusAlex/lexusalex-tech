@@ -13,28 +13,45 @@ use Test\Functional\WebTestCase;
 
 final class AuthCodeRepositoryTest extends WebTestCase
 {
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        /** @var ContainerInterface $container */
+        $container = $this->application()->getContainer();
+        $container->get(AuthCodeRepositoryFixtureTruncate::class)->load();
+
+    }
     public function testSuccess(): void
     {
-        $code = new AuthCodeBuilder();
+        $code = (new AuthCodeBuilder())->build();
 
         /** @var ContainerInterface $container */
         $container = $this->application()->getContainer();
         $repository = $container->get(AuthCodeRepository::class);
+        $repository->persistNewAuthCode($code);
+        self::assertFalse($repository->isAuthCodeRevoked((string)$code->getIdentifier()));
+    }
 
-        $container->get(AuthCodeRepositoryFixtureTruncate::class)->load();
-        $repository->persistNewAuthCode($code->build());
+    public function testException(): void
+    {
+        $code = (new AuthCodeBuilder())->build();
 
+        /** @var ContainerInterface $container */
+        $container = $this->application()->getContainer();
+        $repository = $container->get(AuthCodeRepository::class);
+        $repository->persistNewAuthCode($code);
         $this->expectException(UniqueTokenIdentifierConstraintViolationException::class);
-        $repository->persistNewAuthCode($code->build());
-
+        $repository->persistNewAuthCode($code);
     }
 
     public function testRevokeAuthCode(): void
     {
+        $code = (new AuthCodeBuilder())->build();
         /** @var ContainerInterface $container */
         $container = $this->application()->getContainer();
         $repository = $container->get(AuthCodeRepository::class);
-        $rep = $repository->revokeAuthCode('018e13f4-7cdb-71a8-be03-ce8496c869c5');
+        $repository->persistNewAuthCode($code);
+        self::assertTrue($repository->revokeAuthCode('018e13f4-7cdb-71a8-be03-ce8496c869c5'));
 
     }
 }

@@ -45,24 +45,19 @@ final class AuthCodeRepository implements AuthCodeRepositoryInterface
             ->executeQuery();
     }
 
-    public function revokeAuthCode($codeId): void
+    public function revokeAuthCode($codeId): bool
     {
-
-        $result = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from('oauth_auth_codes')
-            ->where('identifier = :identifier')
-            ->setParameter('identifier', $codeId)
-            ->executeQuery()
-            ->rowCount() > 0;
-
-        if ($result) {
+        if ($this->exists($codeId)) {
             $this->connection->createQueryBuilder()
                 ->delete('oauth_auth_codes')
                 ->where('identifier = :identifier')
                 ->setParameter('identifier', $codeId)
                 ->executeStatement();
+
+            return true;
         }
+
+        return false;
     }
 
     public function isAuthCodeRevoked($codeId): bool
@@ -73,7 +68,7 @@ final class AuthCodeRepository implements AuthCodeRepositoryInterface
     private function exists(string $id): bool
     {
         return $this->connection->createQueryBuilder()
-            ->select('*')
+            ->select('identifier')
             ->from('oauth_auth_codes')
             ->where('identifier = :identifier')
             ->setParameter('identifier', $id)
