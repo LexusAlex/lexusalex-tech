@@ -32,8 +32,10 @@ final class RefreshToken implements RefreshTokenEntityInterface
 
     public function setAccessToken(AccessTokenEntityInterface $accessToken): void
     {
+        /** @var string $userIdentifier */
+        $userIdentifier = $accessToken->getUserIdentifier();
         $this->accessToken = $accessToken;
-        $this->userIdentifier = (string) $accessToken->getUserIdentifier();
+        $this->userIdentifier = $userIdentifier;
     }
 
     public function getUserIdentifier(): ?string

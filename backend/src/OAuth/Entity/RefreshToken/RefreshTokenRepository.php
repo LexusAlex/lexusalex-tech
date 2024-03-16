@@ -46,23 +46,17 @@ final class RefreshTokenRepository implements RefreshTokenRepositoryInterface
             ->executeQuery();
     }
 
-    public function revokeRefreshToken($tokenId): void
+    public function revokeRefreshToken($tokenId): bool
     {
-        $result = $this->connection->createQueryBuilder()
-                ->select('*')
-                ->from('oauth_refresh_tokens')
-                ->where('identifier = :identifier')
-                ->setParameter('identifier', $tokenId)
-                ->executeQuery()
-                ->rowCount() > 0;
-
-        if ($result) {
-            $this->connection->createQueryBuilder()
+        if ($this->exists($tokenId)) {
+            return (bool) $this->connection->createQueryBuilder()
                 ->delete('oauth_refresh_tokens')
                 ->where('identifier = :identifier')
                 ->setParameter('identifier', $tokenId)
                 ->executeStatement();
         }
+
+        return false;
     }
 
     public function isRefreshTokenRevoked($tokenId): bool

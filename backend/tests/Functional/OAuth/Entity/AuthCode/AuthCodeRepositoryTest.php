@@ -29,7 +29,7 @@ final class AuthCodeRepositoryTest extends WebTestCase
         $container = $this->application()->getContainer();
         $repository = $container->get(AuthCodeRepository::class);
         $repository->persistNewAuthCode($code);
-        self::assertFalse($repository->isAuthCodeRevoked((string)$code->getIdentifier()));
+        self::assertFalse($repository->isAuthCodeRevoked((string) $code->getIdentifier()));
     }
 
     public function testException(): void
@@ -44,7 +44,7 @@ final class AuthCodeRepositoryTest extends WebTestCase
         $repository->persistNewAuthCode($code);
     }
 
-    public function testRevokeAuthCode(): void
+    public function testRevokeSuccessAuthCode(): void
     {
         $code = (new AuthCodeBuilder())->build();
         /** @var ContainerInterface $container */
@@ -52,6 +52,13 @@ final class AuthCodeRepositoryTest extends WebTestCase
         $repository = $container->get(AuthCodeRepository::class);
         $repository->persistNewAuthCode($code);
         self::assertTrue($repository->revokeAuthCode('018e13f4-7cdb-71a8-be03-ce8496c869c5'));
+    }
 
+    public function testRevokeFalseAuthCode(): void
+    {
+        /** @var ContainerInterface $container */
+        $container = $this->application()->getContainer();
+        $repository = $container->get(AuthCodeRepository::class);
+        self::assertFalse($repository->revokeAuthCode('018e13f4-7cdb-71a8-be03-ce8496c869c5'));
     }
 }

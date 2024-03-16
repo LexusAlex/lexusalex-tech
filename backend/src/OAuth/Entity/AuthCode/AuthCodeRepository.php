@@ -48,13 +48,11 @@ final class AuthCodeRepository implements AuthCodeRepositoryInterface
     public function revokeAuthCode($codeId): bool
     {
         if ($this->exists($codeId)) {
-            $this->connection->createQueryBuilder()
+            return (bool) $this->connection->createQueryBuilder()
                 ->delete('oauth_auth_codes')
                 ->where('identifier = :identifier')
                 ->setParameter('identifier', $codeId)
                 ->executeStatement();
-
-            return true;
         }
 
         return false;
