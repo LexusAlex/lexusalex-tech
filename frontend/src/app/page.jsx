@@ -1,7 +1,9 @@
+import Link from "next/link";
 
 export default async function Home() {
   return (
       <main>
+        <Link className="btn btn-light" href="/login">Login</Link>
         <div className="text-center mt-4 col-md-6 mx-auto">
           <h1 className="text-danger">Hello Bootstrap</h1>
 
