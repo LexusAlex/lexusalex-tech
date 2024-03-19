@@ -29,9 +29,9 @@ return [
             new DateTimeNormalizer(),
             new PropertyNormalizer(
                 propertyTypeExtractor: new PropertyInfoExtractor(typeExtractors: [
-                new ReflectionExtractor(),
-                new PhpDocExtractor(),
-            ])
+                    new ReflectionExtractor(),
+                    new PhpDocExtractor(),
+                ])
             ),
             new ArrayDenormalizer(),
         ], [
