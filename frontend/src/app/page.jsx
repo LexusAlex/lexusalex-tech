@@ -10,20 +10,34 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
-  Textarea, useDisclosure
+  Textarea, useDisclosure, useToast
 } from "@chakra-ui/react";
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const toast = useToast()
   return (
       <main>
         <Link className="btn btn-light" href="/login">Login</Link>
         <Button onClick={onOpen}>Open Modal</Button>
+        <Button
+            onClick={() =>
+                toast({
+                  title: 'Account created.',
+                  description: "We've created your account for you.",
+                  status: 'loading',
+                  duration: 9000,
+                  isClosable: true,
+                })
+            }
+        >
+          Show Toast
+        </Button>
         <Modal
             isCentered
             onClose={onClose}
             isOpen={isOpen}
-            motionPreset='slideInBottom'
+            motionPreset='slideInTop'
         >
           <ModalOverlay />
           <ModalContent>
@@ -36,7 +50,7 @@ export default function Home() {
               <Button colorScheme='blue' mr={3} onClick={onClose}>
                 Close
               </Button>
-              <Button variant='ghost'>Secondary Action</Button>
+              <Button variant='yellow'>Secondary Action</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
