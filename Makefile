@@ -8,6 +8,7 @@ be-updated: composer-be-updated-all npm-be-updated-all
 test: backend-phpunit backend-load-fixtures
 test-coverage: backend-phpunit-coverage backend-load-fixtures
 infection:backend-phpunit-coverage backend-infection backend-load-fixtures
+install: composer-install npm-install
 # ansible
 ansible-ping:
 	ansible all -i ansible/inventory -m ping
