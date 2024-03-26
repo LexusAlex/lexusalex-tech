@@ -1,19 +1,32 @@
-import {Grid, GridItem} from "@chakra-ui/react";
+import {Box, Grid, GridItem, SimpleGrid} from "@chakra-ui/react";
 
 export default function MainGrid({ children })
 {
     return (
         <Grid
-            h='200px'
-            templateRows='repeat(2, 1fr)'
-            templateColumns='repeat(5, 1fr)'
-            gap={4}
+            templateAreas={`"header header"
+                  "nav main"
+                  "nav footer"`}
+            gridTemplateRows={'70px 1fr 30px'}
+            gridTemplateColumns={'150px 1fr'}
+            h='100vh'
+            w='100vw'
+            gap='2'
+            color='blackAlpha.700'
+            fontWeight='bold'
         >
-            <GridItem rowSpan={2} colSpan={1} bg='tomato' />
-            <GridItem colSpan={2} bg='papayawhip' />
-            <GridItem colSpan={2} bg='papayawhip' />
-            <GridItem colSpan={4} bg='tomato' />
-            {children}
+            <GridItem pl='2' bg='beige' area={'header'}>
+                Header
+            </GridItem>
+            <GridItem pl='2' bg='beige' area={'nav'}>
+                Nav
+            </GridItem>
+            <GridItem pl='2' bg='beige' area={'main'}>
+                {children}
+            </GridItem>
+            <GridItem pl='2' bg='beige' area={'footer'}>
+                Footer
+            </GridItem>
         </Grid>
     )
 }
