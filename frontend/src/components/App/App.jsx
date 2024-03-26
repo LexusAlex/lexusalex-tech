@@ -1,12 +1,9 @@
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
+import MainGrid from "@/components/Main/MainGrid/MainGrid";
 
 export default function App({ children }) {
     return (
         <>
-        <Header />
-            { children }
-        <Footer />
+        <MainGrid>{children}</MainGrid>
         </>
     );
 }
