@@ -1,7 +1,8 @@
-import {Box, Grid, GridItem, SimpleGrid, Skeleton, Stack} from "@chakra-ui/react";
+import {Box, Grid, GridItem, SimpleGrid, Skeleton, Stack, Text} from "@chakra-ui/react";
 
 export default function MainGrid({ children })
 {
+    /*
     return (
         <>
             <Grid
@@ -31,4 +32,15 @@ export default function MainGrid({ children })
             </Grid>
         </>
     )
+     */
+
+    return (
+    <SimpleGrid columns={{ base: 12, md: 1, lg: 3 }} gap={5}>
+        <Box bg={'green.400'}>
+            header
+        </Box>
+    </SimpleGrid>
+    )
+
+
 }
