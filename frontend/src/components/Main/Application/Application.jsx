@@ -1,9 +1,9 @@
 import MainGrid from "@/components/Main/MainGrid/MainGrid";
 
-export default function App({ children }) {
+export default function Application({ children }) {
     return (
         <>
-        <MainGrid>{children}</MainGrid>
+            <MainGrid>{children}</MainGrid>
         </>
     );
 }
