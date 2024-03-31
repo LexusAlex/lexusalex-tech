@@ -1,4 +1,4 @@
-import {Box, Container, Grid, GridItem, Image, SimpleGrid, Skeleton, Stack, Text} from "@chakra-ui/react";
+import {Grid, GridItem} from "@chakra-ui/react";
 import Header from "@/components/Main/Header/Header";
 
 export default function MainGrid({ children })
@@ -13,13 +13,19 @@ export default function MainGrid({ children })
                 gap={'5px'}
                 gridTemplateAreas={{
                     base: `"h h h h h h h h h h h h"
-                    ". menu menu m m m m m m m m ."
-                    "f f f f f f f f f f f f"`,
-                    md: `"h h h h h h h h h h h h"
-                    ". menu menu m m m m m m m m ."
+                    ". m m m m m m m m m m ."
                     "f f f f f f f f f f f f"`,
                     sm: `"h h h h h h h h h h h h"
-                    "m m m m m m m m m m m m"
+                    ". m m m m m m m m m m ."
+                    "f f f f f f f f f f f f"`,
+                    md: `"h h h h h h h h h h h h"
+                    ". m m m m m m m m m m ."
+                    "f f f f f f f f f f f f"`,
+                    lg: `"h h h h h h h h h h h h"
+                    "menu menu menu m m m m m m m m m"
+                    "f f f f f f f f f f f f"`,
+                    xl: `"h h h h h h h h h h h h"
+                    ". menu menu m m m m m m m m ."
                     "f f f f f f f f f f f f"`
                 }}
 
@@ -27,7 +33,7 @@ export default function MainGrid({ children })
                 <GridItem area={'h'} border={'solid'} >
                     <Header></Header>
                 </GridItem>
-                <GridItem area={'menu'} border={'solid'}>
+                <GridItem area={'menu'} border={'solid'} hideBelow={'lg'}>
                     Menu
                 </GridItem>
                 <GridItem area={'m'} border={'solid'}>
