@@ -7,7 +7,6 @@ import {
 } from "@chakra-ui/react";
 import {FaSquarespace} from "react-icons/fa6";
 import NextLink from 'next/link'
-import {Data} from "@/components/Backend/Data";
 
 export default async function Header() {
     return (

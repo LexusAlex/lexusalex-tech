@@ -8,7 +8,7 @@ const Font = Montserrat({ subsets: ['cyrillic-ext','latin','cyrillic'] })
 
 export const metadata = {
   title: "Lexusalex tech",
-  description: "Система для всего угодно",
+  description: "Система для управления своим временем",
 };
 
 export default function RootLayout({ children }) {
