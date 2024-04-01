@@ -45,8 +45,9 @@ final class Authenticate implements MiddlewareInterface
         try {
             $request = $this->server->validateAuthenticatedRequest($request);
         } catch (OAuthServerException $exception) {
-            ErrorMessage::createErrorLogMessage($this->logger, $exception, $request);
-            return $exception->generateHttpResponse($this->response->createResponse());
+            if (ErrorMessage::createErrorLogMessage($this->logger, $exception, $request)) {
+                return $exception->generateHttpResponse($this->response->createResponse());
+            }
         }
 
         /** @var string $user_id */

@@ -27,8 +27,10 @@ final readonly class TokenAction implements RequestHandlerInterface
         try {
             return $this->server->respondToAccessTokenRequest($request, $response);
         } catch (OAuthServerException $exception) {
-            ErrorMessage::createErrorLogMessage($this->logger, $exception, $request);
-            return $exception->generateHttpResponse($response);
+            if (ErrorMessage::createErrorLogMessage($this->logger, $exception, $request)) {
+                return $exception->generateHttpResponse($response);
+            }
         }
+        return $response;
     }
 }

@@ -14,12 +14,14 @@ final class ErrorMessage
         LoggerInterface $logger,
         Throwable $exception,
         ServerRequestInterface $request
-    ): void {
+    ): bool {
         $logger->error($exception->getMessage(), [
             'exception' => $exception,
             'url' => $request->getUri()->getPath(),
             'ip' => (isset($request->getServerParams()['REMOTE_ADDR'])) ? $request->getServerParams()['REMOTE_ADDR'] : null,
         ]);
+
+        return true;
     }
 
     public static function createWarningLogMessage(

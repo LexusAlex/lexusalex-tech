@@ -32,6 +32,8 @@ final readonly class AuthorizeAction implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        $response = $this->response->createResponse();
+
         try {
             $authRequest = $this->server->validateAuthorizationRequest($request);
 
@@ -68,8 +70,12 @@ final readonly class AuthorizeAction implements RequestHandlerInterface
                 $this->template->render('oauth/authorize.html.twig')
             );
         } catch (OAuthServerException $exception) {
-            ErrorMessage::createErrorLogMessage($this->logger, $exception, $request);
-            return $exception->generateHttpResponse($this->response->createResponse());
+
+            if (ErrorMessage::createErrorLogMessage($this->logger, $exception, $request)) {
+                return $exception->generateHttpResponse($this->response->createResponse());
+            }
+
         }
+        return $response;
     }
 }
