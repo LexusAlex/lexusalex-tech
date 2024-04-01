@@ -1,6 +1,6 @@
 import {generateCodeVerifier, generateState} from "oslo/oauth2";
 import oauth2Client from "@/components/OAuth/OAuthClient";
-import {redirect} from "next/navigation";
+import SaveLocalStorage from "@/components/OAuth/SaveLocalStorage";
 
 export default async function Login() {
     const state = generateState();
@@ -11,9 +11,5 @@ export default async function Login() {
         codeVerifier
     });
 
-    //window.localStorage.setItem('auth.location', window.location.pathname);
-    //window.localStorage.setItem('auth.code_verifier', codeVerifier);
-    //window.localStorage.setItem('auth.state', state);
-
-    return redirect(url);
+    return (<SaveLocalStorage codeVerifier={codeVerifier} state={state} url={url} />);
 }
