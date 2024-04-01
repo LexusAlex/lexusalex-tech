@@ -6,13 +6,6 @@ export default function Home()
     <>
         <Heading as='h1' size='xl' noOfLines={1}>
             (4xl) In love with React & Next
-            <Spinner
-                thickness='4px'
-                speed='0.65s'
-                emptyColor='gray.200'
-                color='blue.500'
-                size='xl'
-            />
         </Heading>
         <Text>Контент главной страницы When streaming, a 200 status code will be returned to signal that the request was successful.
 

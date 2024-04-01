@@ -107,6 +107,7 @@ services:
           TOKEN_PATH: http:/127.0.0.1:8080/token
           CLIENT_ID: frontend
           REDIRECT_URL: http://127.0.0.1/oauth
+          NAME: "Lexusalex Tech"
         volumes:
           - ./:/lexusalex-tech
         command: npm run dev

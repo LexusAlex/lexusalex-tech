@@ -3,18 +3,22 @@ import {
     Button,
     Container,
     SimpleGrid,
-    Text
+    Text, Tooltip
 } from "@chakra-ui/react";
 import {FaSquarespace} from "react-icons/fa6";
 import NextLink from 'next/link'
 
-export default async function Header() {
+export default function Header() {
     return (
         <>
             <Container maxW={{ base: "85%"}}>
                 <SimpleGrid gap={'5px'} gridTemplateColumns={"repeat(10, 1fr)"} gridTemplateRows={"4rem"}>
                     <Box margin={'auto'} mr={"9px"}>
-                        <FaSquarespace color={'teal'} size={'50'} fontSize='1.5rem' />
+                        <Tooltip label={'Lexusalex Tech'} placement='auto'>
+                            <NextLink href={'/'}>
+                                <FaSquarespace color={'teal'} size={'50'} fontSize='1.5rem' />
+                            </NextLink>
+                        </Tooltip>
                     </Box>
                     <Box margin={'auto'} ml={'0'}>
                         <Text hideBelow={"sm"} fontWeight={'bold'} color={'teal.700'}>Tech</Text>
