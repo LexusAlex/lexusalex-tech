@@ -1,29 +1,34 @@
 import {
+    AbsoluteCenter,
+    Box,
     Button, ButtonGroup,
     Card,
     CardBody, CardFooter, CardHeader,
-    Center, Divider,
-    IconButton,
+    Center, Divider, Flex, Grid, GridItem,
+    IconButton, SimpleGrid, Spacer,
     Stat,
     StatHelpText,
     StatLabel,
     StatNumber,
-    Text
+    Text, Wrap, WrapItem
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 
 export default function OAuth() {
 
     return (
-        <>
-            <Card align='center' variant={'outline'} size={'md'} maxW='md' justifyContent={'center'}>
-                <CardBody>
-                    <Text fontSize='md'>Спасибо, что залогинились</Text>
-                </CardBody>
-                <CardFooter>
-                    <Button colorScheme='blue' as={NextLink} href="/">На главную</Button>
-                </CardFooter>
-            </Card>
-        </>
+            <SimpleGrid minChildWidth='120px' gridTemplateRows={"auto"}>
+                <Center>
+                    <Card align='center' variant={'outline'} size={'md'} maxW='md' justifyContent={'center'}>
+                        <CardBody>
+                            <Text fontSize='md'>Спасибо, что залогинились</Text>
+                        </CardBody>
+                        <CardFooter>
+                            <Button colorScheme='blue' as={NextLink} href="/">На главную</Button>
+                        </CardFooter>
+                    </Card>
+                </Center>
+            </SimpleGrid>
+
     );
 }
