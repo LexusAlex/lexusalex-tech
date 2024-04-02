@@ -68,7 +68,7 @@ final class AuthorizeTest extends WebTestCase
 
         self::assertEquals(200, $response->getStatusCode());
         self::assertNotEmpty($content = (string) $response->getBody());
-        self::assertStringContainsString('<title>Auth</title>', $content);
+        self::assertStringContainsString('<title>Tech</title>', $content);
     }
 
     public function testInvalidClient(): void
